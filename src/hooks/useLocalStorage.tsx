@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Itodo } from "components/useTodo";
 
 type UseLocalStorage<T> = [T, React.Dispatch<T>];
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -8,7 +9,6 @@ const useLocalStorage = <_, T>(
 ): UseLocalStorage<T> => {
   const [value, setValue] = useState<T>(() => {
     const savedValue: string | null = localStorage.getItem(key);
-
     return savedValue ? JSON.parse(savedValue) : initialValue;
   });
 

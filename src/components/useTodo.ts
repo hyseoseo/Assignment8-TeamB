@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import useLocalStorage from "hooks/useLocalStorage";
+import { STORAGE_KEYS } from "config";
 
 export type Status = "완료" | "진행중" | "시작안함";
 
@@ -13,27 +14,21 @@ export interface Itodo {
 
 const initialTodolist: Itodo[] = [];
 
-export const useTodo = () => {
-  const [todoState, setTodoState] = useState<Itodo[]>(initialTodolist);
-  let nextIdState: number = todoState.length
-    ? todoState[todoState.length - 1].id + 1
-    : 0;
+const useTodo = () => {
+  const [todos, setTodos] = useLocalStorage(
+    STORAGE_KEYS.todos,
+    initialTodolist
+  );
+  let nextIdState: number = todos.length ? todos[todos.length - 1].id + 1 : 0;
 
-  const incrementNextId = () => {
+  const incrementNextId = (): void => {
     nextIdState++;
   };
 
-  const saveData = () => {
-    //useStorage hook
-  };
-
-  const loadData = () => {
-    //useStorage hook
-  };
-
   const editTodo = (id: number, status: Status): void => {
-    setTodoState((prevState) =>
-      prevState.map((todo: Itodo) => ({
+    const prev: Itodo[] = [...todos];
+    setTodos(
+      prev.map((todo: Itodo) => ({
         ...todo,
         updatedAt: new Date(),
         status: status,
@@ -42,28 +37,30 @@ export const useTodo = () => {
   };
 
   const removeTodo = (id: number): void => {
-    setTodoState((prevState) =>
-      prevState.filter((todo: Itodo) => todo.id !== id)
-    );
+    const prev: Itodo[] = [...todos];
+    setTodos(prev.filter((todo: Itodo) => todo.id !== id));
   };
 
   const createTodo = (todo: Itodo): void => {
-    setTodoState((prevState) =>
-      prevState.concat({
+    const prev: Itodo[] = [...todos];
+    setTodos(
+      prev.concat({
         ...todo,
         id: nextIdState,
         createdAt: new Date(),
+        updatedAt: new Date(),
       })
     );
   };
 
   return {
-    todoState,
+    todos,
     nextIdState,
     incrementNextId,
     editTodo,
     removeTodo,
     createTodo,
-    saveData,
   };
 };
+
+export default useTodo;

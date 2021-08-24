@@ -1,28 +1,36 @@
 import React from "react";
 import { css } from "@emotion/react";
-import { useTodo, Itodo, Status } from "components/useTodo";
-import TodoItem from "./TodoItem";
+import { Itodo, Status } from "components/useTodo";
+import useTodo from "components/useTodo";
+import TodoItem from "./mytodoitem";
 
 const Todo: React.FC = () => {
   const {
-    todoState,
+    todos,
     nextIdState,
     incrementNextId,
     editTodo,
     removeTodo,
     createTodo,
-    saveData,
   } = useTodo();
+
+  const todo: Itodo = {
+    id: 1,
+    taskName: "task",
+    status: "시작안함",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
+
+  const handleClick = () => {
+    createTodo(todo);
+  };
 
   return (
     <div>
       <h1 css={Heading}>hey</h1>
-      <TodoItem
-        editTodo={editTodo}
-        removeTodo={removeTodo}
-        saveData={saveData}
-        todo={todoState[0]}
-      />
+      <button onClick={handleClick}>add</button>
+      {console.log(todos)}
     </div>
   );
 };

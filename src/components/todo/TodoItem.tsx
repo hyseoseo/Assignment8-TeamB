@@ -1,12 +1,13 @@
-import React from "react";
-import { css } from "@emotion/react";
+import React from 'react';
+import { css } from '@emotion/react';
+import { useState } from 'react';
 
 const TodoItem: React.FC = () => {
   return (
-    <div css={ItemContainer}>
+    <article css={ItemContainer}>
       <div css={TodoContent}>할 일</div>
       <div css={TodoInfo}>
-        <div css={[Important]}>★</div>
+        <div css={StarRed}>★</div>
         <div css={TodoStatus}>
           <select>
             <option>시작 안함</option>
@@ -18,7 +19,7 @@ const TodoItem: React.FC = () => {
           <button css={DeleteButton}>삭제</button>
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 
@@ -27,7 +28,6 @@ export default TodoItem;
 const ItemContainer = css`
   width: 95%;
   margin: 0 auto;
-  // display: flex;
   background: #eeeeee;
   padding: 10px 17px;
   border-radius: 10px;
@@ -38,13 +38,14 @@ const TodoContent = css`
   padding: 10px 0;
 `;
 
-const Important = css`
-  font-size: 30px;
+const StarWhite = css`
+  font-size: 2rem;
   color: #fff;
   cursor: pointer;
 `;
 
-const ImportantClick = css`
+const StarRed = css`
+  ${StarWhite}
   color: #ff3333;
 `;
 

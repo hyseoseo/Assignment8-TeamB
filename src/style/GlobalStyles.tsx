@@ -9,4 +9,8 @@ export const GlobalStyles = css`
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
   }
+  body {
+    background: #eeeeee;
+    font-size: 16px;
+  }
 `;

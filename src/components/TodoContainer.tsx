@@ -1,13 +1,13 @@
-import React from "react";
-import TodoList from "./todo/TodoList";
-import TodoHead from "./todo/TodoHead";
-import { css } from "@emotion/react";
+import React from 'react';
+import TodoList from './todo/TodoList';
+import TodoHead from './todo/TodoHead';
+import { css } from '@emotion/react';
 
 const TodoContainer: React.FC = () => {
   return (
     <div css={TodoTemplate}>
-      <TodoHead></TodoHead>
-      <TodoList></TodoList>
+      <TodoHead />
+      <TodoList />
     </div>
   );
 };

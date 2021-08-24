@@ -1,12 +1,12 @@
-import React from "react";
-import { css } from "@emotion/react";
-import TodoItem from "./TodoItem";
+import React from 'react';
+import { css } from '@emotion/react';
+import TodoItem from './TodoItem';
 
 const TodoList: React.FC = () => {
   return (
-    <div css={ListContainer}>
+    <main css={ListContainer}>
       <TodoItem />
-    </div>
+    </main>
   );
 };
 

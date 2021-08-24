@@ -1,5 +1,5 @@
-import { css } from "@emotion/react";
-import emotionReset from "emotion-reset";
+import { css } from '@emotion/react';
+import emotionReset from 'emotion-reset';
 
 export const GlobalStyles = css`
   ${emotionReset}
@@ -11,5 +11,6 @@ export const GlobalStyles = css`
   }
   body {
     background: #eeeeee;
+    font-size: 16px;
   }
 `;

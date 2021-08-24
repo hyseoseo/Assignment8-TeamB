@@ -4,22 +4,18 @@ import { useState } from 'react';
 
 const TodoItem: React.FC = () => {
   return (
-    <article css={ItemContainer}>
-      <div css={TodoContent}>할 일</div>
+    <li css={ItemContainer}>
+      <p css={TodoContent}>할 일</p>
       <div css={TodoInfo}>
-        <div css={StarRed}>★</div>
-        <div css={TodoStatus}>
-          <select>
-            <option>시작 안함</option>
-            <option>진행중</option>
-            <option>완료</option>
-          </select>
-        </div>
-        <div css={TodoStatus}>
-          <button css={DeleteButton}>삭제</button>
-        </div>
+        <button css={StarRed}>★</button>
+        <select>
+          <option>시작 안함</option>
+          <option>진행중</option>
+          <option>완료</option>
+        </select>
+        <button css={DeleteButton}>삭제</button>
       </div>
-    </article>
+    </li>
   );
 };
 
@@ -42,6 +38,12 @@ const StarWhite = css`
   font-size: 2rem;
   color: #fff;
   cursor: pointer;
+  background: inherit;
+  border: none;
+  box-shadow: none;
+  overflow: visible;
+  line-height: 30px;
+  padding-right: 10px;
 `;
 
 const StarRed = css`
@@ -52,6 +54,7 @@ const StarRed = css`
 const TodoInfo = css`
   display: flex;
   justify-content: flex-end;
+  height: 30px;
 `;
 
 const TodoStatus = css`

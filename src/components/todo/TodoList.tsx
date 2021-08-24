@@ -4,9 +4,9 @@ import TodoItem from './TodoItem';
 
 const TodoList: React.FC = () => {
   return (
-    <main css={ListContainer}>
+    <ul css={ListContainer}>
       <TodoItem />
-    </main>
+    </ul>
   );
 };
 

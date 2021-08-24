@@ -5,7 +5,7 @@ import { css } from '@emotion/react';
 const Todo: React.FC = () => {
   return (
     <header css={HeadBlock}>
-      <div css={Time}>01:02 PM</div>
+      <h1 css={Time}>01:02 PM</h1>
       <TodoCreate />
     </header>
   );

@@ -4,21 +4,14 @@ import { Itodo } from "components/todo/useTodo";
 import useInput from "hooks/useInput";
 
 interface ITodoCreateProps {
-  nextId: number;
   createTodo: (value: string) => void;
-  incrementNextId: () => void;
 }
 
-const TodoCreate: React.FC<ITodoCreateProps> = ({
-  nextId,
-  createTodo,
-  incrementNextId,
-}) => {
+const TodoCreate: React.FC<ITodoCreateProps> = ({ createTodo }) => {
   const { value, handleChange } = useInput();
 
   const handleClick = () => {
     createTodo(value);
-    incrementNextId();
   };
 
   return (

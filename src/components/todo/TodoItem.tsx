@@ -2,24 +2,23 @@ import React from "react";
 import { css } from "@emotion/react";
 import { useState } from "react";
 import { Itodo, Status } from "components/todo/useTodo";
+import { OPTIONS } from "config";
 import Todo from "./TodoHead";
 
 interface ITodoItemProps {
-  //editTodo: (id: number, status: Status) => void;
+  //changeTodoStatus: (id: number, status: Status) => void;
   removeTodo: (id: number) => void;
   item: Itodo;
 }
 
 const TodoItem: React.FC<ITodoItemProps> = ({ item, removeTodo }) => {
-  const options = ["시작안함", "진행중", "완료"];
-
   return (
     <li css={ItemContainer}>
       <p css={TodoContent}>{item.taskName}</p>
       <div css={TodoInfo}>
         <button css={StarRed}>★</button>
         <select>
-          {options.map((option) => (
+          {OPTIONS.map((option) => (
             <option value={option}>{option}</option>
           ))}
         </select>

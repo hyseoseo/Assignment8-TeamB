@@ -1,7 +1,6 @@
 import React from "react";
 import useLocalStorage from "hooks/useLocalStorage";
 import { STORAGE_KEYS } from "config";
-import { stringify } from "querystring";
 
 export type Status = "완료" | "진행중" | "시작안함";
 
@@ -20,15 +19,9 @@ const useTodo = () => {
     STORAGE_KEYS.todos,
     initialTodolist
   );
-  let nextIdState: number = todos.length ? todos[todos.length - 1].id + 1 : 0;
 
-  const incrementNextId = (): void => {
-    nextIdState++;
-  };
-
-  const editTodo = (id: number, status: Status): void => {
-    const prev: Itodo[] = [...todos];
-    setTodos(
+  const changeTodoStatus = (id: number, status: Status): void => {
+    setTodos((prev) =>
       prev.map((todo: Itodo) => ({
         ...todo,
         updatedAt: new Date(),
@@ -38,17 +31,17 @@ const useTodo = () => {
   };
 
   const removeTodo = (id: number): void => {
-    const prev: Itodo[] = [...todos];
-    setTodos(prev.filter((todo: Itodo) => todo.id !== id));
+    const remains = todos.filter((todo: Itodo) => todo.id !== id);
+    remains.map((item, index) => (item.id = index));
+    setTodos(remains);
   };
 
   const createTodo = (value: string): void => {
-    const prev: Itodo[] = [...todos];
-    setTodos(
+    setTodos((prev) =>
       prev.concat({
         taskName: value,
         status: "시작안함",
-        id: nextIdState,
+        id: todos.length,
         createdAt: new Date(),
         updatedAt: new Date(),
       })
@@ -57,9 +50,7 @@ const useTodo = () => {
 
   return {
     todos,
-    nextIdState,
-    incrementNextId,
-    editTodo,
+    changeTodoStatus,
     removeTodo,
     createTodo,
   };

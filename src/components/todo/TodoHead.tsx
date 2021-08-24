@@ -4,24 +4,14 @@ import { css } from "@emotion/react";
 import { Itodo } from "components/todo/useTodo";
 
 interface ITodoProps {
-  nextId: number;
   createTodo: (value: string) => void;
-  incrementNextId: () => void;
 }
 
-const Todo: React.FC<ITodoProps> = ({
-  nextId,
-  createTodo,
-  incrementNextId,
-}) => {
+const Todo: React.FC<ITodoProps> = ({ createTodo }) => {
   return (
     <header css={HeadBlock}>
       <h1 css={Time}>01:02 PM</h1>
-      <TodoCreate
-        nextId={nextId}
-        createTodo={createTodo}
-        incrementNextId={incrementNextId}
-      />
+      <TodoCreate createTodo={createTodo} />
     </header>
   );
 };

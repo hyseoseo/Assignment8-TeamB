@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Itodo } from "components/todo/useTodo";
 
-type UseLocalStorage<T> = [T, React.Dispatch<T>];
+type UseLocalStorage<T> = [T, React.Dispatch<T | ((prevState: T) => T)>];
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const useLocalStorage = <_, T>(
   key: string,

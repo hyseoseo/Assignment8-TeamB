@@ -1,10 +1,10 @@
-import React from 'react';
-import Todo from 'components/Todo';
+import React from "react";
+import TodoContainer from "components/TodoContainer";
 
 const App: React.FC = () => {
   return (
-    <div className='App'>
-      <Todo></Todo>
+    <div>
+      <TodoContainer />
     </div>
   );
 };

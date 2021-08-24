@@ -1,6 +1,7 @@
 import React from "react";
 import useLocalStorage from "hooks/useLocalStorage";
 import { STORAGE_KEYS } from "config";
+import { stringify } from "querystring";
 
 export type Status = "완료" | "진행중" | "시작안함";
 
@@ -41,11 +42,12 @@ const useTodo = () => {
     setTodos(prev.filter((todo: Itodo) => todo.id !== id));
   };
 
-  const createTodo = (todo: Itodo): void => {
+  const createTodo = (value: string): void => {
     const prev: Itodo[] = [...todos];
     setTodos(
       prev.concat({
-        ...todo,
+        taskName: value,
+        status: "시작안함",
         id: nextIdState,
         createdAt: new Date(),
         updatedAt: new Date(),

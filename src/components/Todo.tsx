@@ -1,7 +1,17 @@
-import React from 'react';
-import { css } from '@emotion/react';
+import React from "react";
+import { css } from "@emotion/react";
+import { useTodo, Itodo, Status } from "components/useTodo";
 
 const Todo: React.FC = () => {
+  const {
+    todoState,
+    nextIdState,
+    incrementNextId,
+    editTodo,
+    removeTodo,
+    createTodo,
+  } = useTodo();
+
   return (
     <div>
       <h1 css={Heading}>hey</h1>

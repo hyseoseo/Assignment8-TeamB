@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import useLocalStorage from "hooks/useLocalStorage";
 
 export type Status = "완료" | "진행중" | "시작안함";
 
@@ -30,23 +31,23 @@ export const useTodo = () => {
     //useStorage hook
   };
 
-  const editTodo = (id: number) => {
+  const editTodo = (id: number, status: Status): void => {
     setTodoState((prevState) =>
       prevState.map((todo: Itodo) => ({
         ...todo,
         updatedAt: new Date(),
-        //status 변경
+        status: status,
       }))
     );
   };
 
-  const removeTodo = (id: number) => {
+  const removeTodo = (id: number): void => {
     setTodoState((prevState) =>
       prevState.filter((todo: Itodo) => todo.id !== id)
     );
   };
 
-  const createTodo = (todo: Itodo) => {
+  const createTodo = (todo: Itodo): void => {
     setTodoState((prevState) =>
       prevState.concat({
         ...todo,
@@ -63,5 +64,6 @@ export const useTodo = () => {
     editTodo,
     removeTodo,
     createTodo,
+    saveData,
   };
 };

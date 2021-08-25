@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { dateCountry, dateOptions } from 'config';
+import { getCurrentDate } from 'utils/getCurrentDate';
 import { TodoCreate } from 'components/todo';
 
 interface ITodoHeadProps {
@@ -10,7 +10,7 @@ interface ITodoHeadProps {
 const TodoHead: React.FC<ITodoHeadProps> = ({ createTodo }) => {
   return (
     <header css={HeadBlock}>
-      <h1 css={Time}>{new Date().toLocaleString(dateCountry, dateOptions)}</h1>
+      <h1 css={Time}>{getCurrentDate()}</h1>
       <TodoCreate createTodo={createTodo} />
     </header>
   );

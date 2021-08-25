@@ -1,22 +1,16 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { OPTIONS, Itodo } from 'config';
+import { OPTIONS, Itodo } from './type';
 
 interface ITodoItemProps {
   //changeTodoStatus: (id: number, status: Status) => void;
-  removeTodo: (id: number) => void;
-  updateTodoId: () => void;
   item: Itodo;
+  handleDeleteTodo: (id: number) => void;
 }
 
-const TodoItem: React.FC<ITodoItemProps> = ({
-  item,
-  removeTodo,
-  updateTodoId,
-}) => {
+const TodoItem: React.FC<ITodoItemProps> = ({ item, handleDeleteTodo }) => {
   const handleDeleteClick = (id: number) => {
-    removeTodo(id);
-    updateTodoId();
+    handleDeleteTodo(id);
   };
 
   return (

@@ -1,16 +1,8 @@
 import React from 'react';
-import { STORAGE_KEYS, Status, Itodo } from 'config';
+import { STORAGE_KEYS } from 'config';
+import { Status, Itodo } from './type';
 import useLocalStorage from 'hooks/useLocalStorage';
 
-/*
-export interface Itodo {
-  id: number;
-  taskName: string;
-  status: Status;
-  createdAt: Date;
-  updatedAt: Date;
-}
-*/
 const initialTodolist: Itodo[] = [];
 
 const useTodo = () => {
@@ -39,6 +31,11 @@ const useTodo = () => {
     );
   };
 
+  const handleDeleteTodo = (id: number): void => {
+    removeTodo(id);
+    updateTodoId();
+  };
+
   const createTodo = (value: string): void => {
     setTodos((prev) =>
       prev.concat({
@@ -54,9 +51,8 @@ const useTodo = () => {
   return {
     todos,
     changeTodoStatus,
-    removeTodo,
     createTodo,
-    updateTodoId,
+    handleDeleteTodo,
   };
 };
 

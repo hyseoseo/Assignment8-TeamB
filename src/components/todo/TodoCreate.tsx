@@ -7,7 +7,7 @@ interface ITodoCreateProps {
 }
 
 const TodoCreate: React.FC<ITodoCreateProps> = ({ createTodo }) => {
-  const { value, handleChange } = useInput();
+  const { value, handleChange } = useInput('');
 
   const handleClick = () => {
     createTodo(value);
@@ -15,7 +15,6 @@ const TodoCreate: React.FC<ITodoCreateProps> = ({ createTodo }) => {
 
   return (
     <article css={CreateContainer}>
-      <h2>할 일을 추가하세요!</h2>
       <div>
         <input
           value={value}

@@ -1,28 +1,40 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { css } from '@emotion/react';
-import { OPTIONS, Itodo } from './type';
+import { OPTIONS, Itodo, Status } from './type';
+import { useInput } from 'hooks';
 
 interface ITodoItemProps {
-  //changeTodoStatus: (id: number, status: Status) => void;
+  changeTodoStatus: (id: number, status: Status | string) => void;
   item: Itodo;
   handleDeleteTodo: (id: number) => void;
 }
 
-const TodoItem: React.FC<ITodoItemProps> = ({ item, handleDeleteTodo }) => {
+const TodoItem: React.FC<ITodoItemProps> = ({
+  item,
+  handleDeleteTodo,
+  changeTodoStatus,
+}) => {
+  const { value, handleChange } = useInput(item.status);
+
   const handleDeleteClick = (id: number) => {
     handleDeleteTodo(id);
   };
+
+  useEffect(() => {
+    changeTodoStatus(item.id, value);
+  }, [value]);
 
   return (
     <li css={ItemContainer}>
       <p css={TodoContent}>{item.taskName}</p>
       <div css={TodoInfo}>
         <button css={StarRed}>★</button>
-        <select>
+        <select value={item.status} onChange={handleChange}>
           {OPTIONS.map((option) => (
             <option value={option}>{option}</option>
           ))}
         </select>
+        {console.log(value)}
         <button css={DeleteButton} onClick={() => handleDeleteClick(item.id)}>
           삭제
         </button>

@@ -8,7 +8,12 @@ const TodoContainer: React.FC = () => {
   return (
     <div css={TodoTemplate}>
       <TodoHead createTodo={createTodo} />
-      <TodoList todos={todos} setTodos={setTodos} handleDeleteTodo={handleDeleteTodo} />
+      <TodoList
+        todos={todos}
+        setTodos={setTodos}
+        handleDeleteTodo={handleDeleteTodo}
+        changeTodoStatus={changeTodoStatus}
+      />
     </div>
   );
 };

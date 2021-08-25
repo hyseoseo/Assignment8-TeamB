@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { css } from '@emotion/react';
-import { Itodo } from './type';
+import { Itodo, Status } from './type';
 import { TodoController } from '.';
 import { SetState } from 'hooks/types';
 
@@ -12,6 +12,7 @@ interface Iprop {
   handleDragOver: (e: React.DragEvent, setIsDragOver: SetState<boolean>) => void;
   handleDragEnd: (setIsDragOver: SetState<boolean>) => void;
   handleDeleteTodo: (id: number) => void;
+  changeTodoStatus: (id: number, status: Status | string) => void;
 }
 
 const TodoItem: React.FC<Iprop> = ({ ...props }) => {
@@ -24,6 +25,7 @@ const TodoItem: React.FC<Iprop> = ({ ...props }) => {
     handleDragOver,
     handleDragEnd,
     handleDeleteTodo,
+    changeTodoStatus,
   } = props;
 
   return (
@@ -36,7 +38,11 @@ const TodoItem: React.FC<Iprop> = ({ ...props }) => {
       onDragEnd={() => handleDragEnd(setIsDragOver)}
     >
       <p css={Content}>{todo.taskName}</p>
-      <TodoController todoId={todo.id} handleDeleteTodo={handleDeleteTodo} />
+      <TodoController
+        todo={todo}
+        handleDeleteTodo={handleDeleteTodo}
+        changeTodoStatus={changeTodoStatus}
+      />
     </li>
   );
 };

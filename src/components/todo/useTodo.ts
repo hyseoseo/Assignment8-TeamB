@@ -7,13 +7,13 @@ const initialTodolist: Itodo[] = [];
 const useTodo = () => {
   const [todos, setTodos] = useLocalStorage(STORAGE_KEYS.todos, initialTodolist);
 
-  const changeTodoStatus = (id: number, status: Status): void => {
+  const changeTodoStatus = (id: number, status: Status | string): void => {
     setTodos((prev) =>
-      prev.map((todo: Itodo) => ({
-        ...todo,
-        updatedAt: new Date(),
-        status: status,
-      })),
+      prev.map((todo: Itodo) => {
+        return todo.id === id
+          ? { ...todo, updatedAt: new Date(), status: status }
+          : todo;
+      }),
     );
   };
 

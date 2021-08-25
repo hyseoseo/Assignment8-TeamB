@@ -1,16 +1,22 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import { useDnD } from 'hooks';
-import { Itodo } from './type';
-import { TodoItem } from '.';
+import { Itodo, Status } from './type';
+import { TodoItem } from 'components/todo';
 
 interface ITodoListProps {
   todos: Itodo[];
   setTodos: React.Dispatch<React.SetStateAction<Itodo[]>>;
   handleDeleteTodo: (id: number) => void;
+  changeTodoStatus: (id: number, status: Status | string) => void;
 }
 
-const TodoList: React.FC<ITodoListProps> = ({ todos, setTodos, handleDeleteTodo }) => {
+const TodoList: React.FC<ITodoListProps> = ({
+  todos,
+  setTodos,
+  handleDeleteTodo,
+  changeTodoStatus,
+}) => {
   const { handleDragStart, handleDragEnter, handleDragOver, handleDragEnd } = useDnD(
     todos,
     setTodos,
@@ -28,6 +34,7 @@ const TodoList: React.FC<ITodoListProps> = ({ todos, setTodos, handleDeleteTodo 
           handleDragOver={handleDragOver}
           handleDragEnd={handleDragEnd}
           handleDeleteTodo={handleDeleteTodo}
+          changeTodoStatus={changeTodoStatus}
         />
       ))}
     </ul>

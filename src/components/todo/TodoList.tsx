@@ -1,11 +1,19 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import TodoItem from './TodoItem';
+import { Itodo } from './type';
+import { TodoItem } from 'components/todo';
 
-const TodoList: React.FC = () => {
+interface ITodoListProps {
+  todos: Itodo[];
+  handleDeleteTodo: (id: number) => void;
+}
+
+const TodoList: React.FC<ITodoListProps> = ({ todos, handleDeleteTodo }) => {
   return (
     <ul css={ListContainer}>
-      <TodoItem />
+      {todos.map((todo) => (
+        <TodoItem item={todo} handleDeleteTodo={handleDeleteTodo} />
+      ))}
     </ul>
   );
 };

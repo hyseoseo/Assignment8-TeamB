@@ -1,19 +1,31 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { useState } from 'react';
+import { OPTIONS, Itodo } from './type';
 
-const TodoItem: React.FC = () => {
+interface ITodoItemProps {
+  //changeTodoStatus: (id: number, status: Status) => void;
+  item: Itodo;
+  handleDeleteTodo: (id: number) => void;
+}
+
+const TodoItem: React.FC<ITodoItemProps> = ({ item, handleDeleteTodo }) => {
+  const handleDeleteClick = (id: number) => {
+    handleDeleteTodo(id);
+  };
+
   return (
     <li css={ItemContainer}>
-      <p css={TodoContent}>할 일</p>
+      <p css={TodoContent}>{item.taskName}</p>
       <div css={TodoInfo}>
         <button css={StarRed}>★</button>
         <select>
-          <option>시작 안함</option>
-          <option>진행중</option>
-          <option>완료</option>
+          {OPTIONS.map((option) => (
+            <option value={option}>{option}</option>
+          ))}
         </select>
-        <button css={DeleteButton}>삭제</button>
+        <button css={DeleteButton} onClick={() => handleDeleteClick(item.id)}>
+          삭제
+        </button>
       </div>
     </li>
   );

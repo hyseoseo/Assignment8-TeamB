@@ -1,13 +1,31 @@
 import React from 'react';
 import { css } from '@emotion/react';
+import useInput from 'hooks/useInput';
 
-const TodoCreate: React.FC = () => {
+interface ITodoCreateProps {
+  createTodo: (value: string) => void;
+}
+
+const TodoCreate: React.FC<ITodoCreateProps> = ({ createTodo }) => {
+  const { value, handleChange } = useInput();
+
+  const handleClick = () => {
+    createTodo(value);
+  };
+
   return (
     <article css={CreateContainer}>
       <h2>할 일을 추가하세요!</h2>
       <div>
-        <input css={TodoInput} placeholder="할 일을 적어주세요" />
-        <button css={AddButton}>추가</button>
+        <input
+          value={value}
+          onChange={handleChange}
+          css={TodoInput}
+          placeholder="할 일을 적어주세요"
+        />
+        <button css={AddButton} onClick={handleClick}>
+          추가
+        </button>
       </div>
     </article>
   );

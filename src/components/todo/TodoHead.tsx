@@ -1,17 +1,22 @@
 import React from 'react';
-import TodoCreate from './TodoCreate';
 import { css } from '@emotion/react';
+import { getCurrentDate } from 'utils/getCurrentDate';
+import { TodoCreate } from 'components/todo';
 
-const Todo: React.FC = () => {
+interface ITodoHeadProps {
+  createTodo: (value: string) => void;
+}
+
+const TodoHead: React.FC<ITodoHeadProps> = ({ createTodo }) => {
   return (
     <header css={HeadBlock}>
-      <h1 css={Time}>01:02 PM</h1>
-      <TodoCreate />
+      <h1 css={Time}>{getCurrentDate()}</h1>
+      <TodoCreate createTodo={createTodo} />
     </header>
   );
 };
 
-export default Todo;
+export default TodoHead;
 
 const HeadBlock = css`
   text-align: center;

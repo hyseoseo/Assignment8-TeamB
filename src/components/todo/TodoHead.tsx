@@ -1,14 +1,13 @@
-import React from "react";
-import TodoCreate from "./TodoCreate";
-import { css } from "@emotion/react";
-import { Itodo } from "components/todo/useTodo";
-import { dateCountry, dateOptions } from "config";
+import React from 'react';
+import { css } from '@emotion/react';
+import { dateCountry, dateOptions } from 'config';
+import { TodoCreate } from 'components/todo';
 
-interface ITodoProps {
+interface ITodoHeadProps {
   createTodo: (value: string) => void;
 }
 
-const Todo: React.FC<ITodoProps> = ({ createTodo }) => {
+const TodoHead: React.FC<ITodoHeadProps> = ({ createTodo }) => {
   return (
     <header css={HeadBlock}>
       <h1 css={Time}>{new Date().toLocaleString(dateCountry, dateOptions)}</h1>
@@ -17,7 +16,7 @@ const Todo: React.FC<ITodoProps> = ({ createTodo }) => {
   );
 };
 
-export default Todo;
+export default TodoHead;
 
 const HeadBlock = css`
   text-align: center;

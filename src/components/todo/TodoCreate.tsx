@@ -1,7 +1,6 @@
-import React from "react";
-import { css } from "@emotion/react";
-import { Itodo } from "components/todo/useTodo";
-import useInput from "hooks/useInput";
+import React from 'react';
+import { css } from '@emotion/react';
+import useInput from 'hooks/useInput';
 
 interface ITodoCreateProps {
   createTodo: (value: string) => void;

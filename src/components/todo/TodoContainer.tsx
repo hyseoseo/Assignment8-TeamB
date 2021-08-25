@@ -1,8 +1,6 @@
-import React from "react";
-import TodoList from "./todo/TodoList";
-import TodoHead from "./todo/TodoHead";
-import useTodo from "./todo/useTodo";
-import { css } from "@emotion/react";
+import React from 'react';
+import { css } from '@emotion/react';
+import { TodoList, TodoHead, useTodo } from 'components/todo';
 
 const TodoContainer: React.FC = () => {
   const { todos, changeTodoStatus, removeTodo, updateTodoId, createTodo } =

@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-import { css } from "@emotion/react";
-import { OPTIONS } from "config";
-import { Itodo } from "components/todo/useTodo";
-import Todo from "./TodoHead";
+import React from 'react';
+import { css } from '@emotion/react';
+import { OPTIONS, Itodo } from 'config';
 
 interface ITodoItemProps {
   //changeTodoStatus: (id: number, status: Status) => void;

@@ -1,11 +1,8 @@
-import React from "react";
-import useLocalStorage from "hooks/useLocalStorage";
-import { STORAGE_KEYS } from "config";
-import { Status } from "config";
-import Todo from "./TodoHead";
+import React from 'react';
+import { STORAGE_KEYS, Status, Itodo } from 'config';
+import useLocalStorage from 'hooks/useLocalStorage';
 
-//export type Status = "완료" | "진행중" | "시작안함";
-
+/*
 export interface Itodo {
   id: number;
   taskName: string;
@@ -13,13 +10,13 @@ export interface Itodo {
   createdAt: Date;
   updatedAt: Date;
 }
-
+*/
 const initialTodolist: Itodo[] = [];
 
 const useTodo = () => {
   const [todos, setTodos] = useLocalStorage(
     STORAGE_KEYS.todos,
-    initialTodolist
+    initialTodolist,
   );
 
   const changeTodoStatus = (id: number, status: Status): void => {
@@ -28,7 +25,7 @@ const useTodo = () => {
         ...todo,
         updatedAt: new Date(),
         status: status,
-      }))
+      })),
     );
   };
 
@@ -38,7 +35,7 @@ const useTodo = () => {
 
   const updateTodoId = (): void => {
     setTodos((prev: Itodo[]) =>
-      prev.map((todo: Itodo, index) => ({ ...todo, id: index }))
+      prev.map((todo: Itodo, index) => ({ ...todo, id: index })),
     );
   };
 
@@ -50,7 +47,7 @@ const useTodo = () => {
         id: todos.length,
         createdAt: new Date(),
         updatedAt: new Date(),
-      })
+      }),
     );
   };
 

@@ -1,7 +1,7 @@
-import React from "react";
-import { css } from "@emotion/react";
-import TodoItem from "./TodoItem";
-import { Itodo } from "components/todo/useTodo";
+import React from 'react';
+import { css } from '@emotion/react';
+import { Itodo } from 'config';
+import { TodoItem } from 'components/todo';
 
 interface ITodoListProps {
   todos: Itodo[];

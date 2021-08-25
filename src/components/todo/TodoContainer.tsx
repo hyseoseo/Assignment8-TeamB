@@ -3,19 +3,15 @@ import { css } from '@emotion/react';
 import { TodoList, TodoHead, useTodo } from 'components/todo';
 
 const TodoContainer: React.FC = () => {
-  const {
-    todos,
-    changeTodoStatus,
-    createTodo,
-    handleDeleteTodo,
-    changeTodoImportance,
-  } = useTodo();
+  const { todos, setTodos, changeTodoStatus, createTodo, handleDeleteTodo, changeTodoImportance } =
+    useTodo();
 
   return (
     <div css={TodoTemplate}>
       <TodoHead createTodo={createTodo} />
       <TodoList
         todos={todos}
+        setTodos={setTodos}
         handleDeleteTodo={handleDeleteTodo}
         changeTodoStatus={changeTodoStatus}
         changeTodoImportance={changeTodoImportance}

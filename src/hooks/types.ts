@@ -1,0 +1,16 @@
+export type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
+export type SetStateArr<T> = React.Dispatch<React.SetStateAction<T[]>>;
+export type UseStorage<T> = [T, React.Dispatch<React.SetStateAction<T>>];
+export type ChangeEvent = React.ChangeEvent<HTMLInputElement | HTMLSelectElement>;
+
+export interface IuseInput {
+  value: string;
+  handleChange: (e: ChangeEvent) => void;
+}
+
+export interface IuseDnD {
+  handleDragStart: (position: number) => void;
+  handleDragEnter: (position: number) => void;
+  handleDragOver: (e: React.DragEvent, setIsDragOver: SetState<boolean>) => void;
+  handleDragEnd: (setIsDragOver: SetState<boolean>) => void;
+}

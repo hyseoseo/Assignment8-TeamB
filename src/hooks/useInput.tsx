@@ -1,11 +1,5 @@
-import React, { useState } from 'react';
-
-type ChangeEvent = React.ChangeEvent<HTMLInputElement | HTMLSelectElement>;
-
-interface IuseInput {
-  value: string;
-  handleChange: (e: ChangeEvent) => void;
-}
+import { useState } from 'react';
+import { ChangeEvent, IuseInput } from './types';
 
 const useInput = (initialValue: string = ''): IuseInput => {
   const [value, setValue] = useState<string>(initialValue);

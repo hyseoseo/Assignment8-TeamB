@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-type Storage<T> = [T, React.Dispatch<T | ((prevState: T) => T)>];
+import { UseStorage } from './types';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const useLocalStorage = <_, T>(key: string, initialValue: T): Storage<T> => {
-  const [value, setValue] = useState<T>(() => {
+const useLocalStorage = <T extends string, U>(key: T, initialValue: U): UseStorage<U> => {
+  const [value, setValue] = useState<U>(() => {
     const savedValue: string | null = localStorage.getItem(key);
     return savedValue ? JSON.parse(savedValue) : initialValue;
   });

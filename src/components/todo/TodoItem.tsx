@@ -29,7 +29,7 @@ const TodoItem: React.FC<ITodoItemProps> = ({
       <p css={TodoContent}>{item.taskName}</p>
       <div css={TodoInfo}>
         <button css={StarRed}>★</button>
-        <select value={value} onChange={handleChange}>
+        <select value={item.status} onChange={handleChange}>
           {OPTIONS.map((option) => (
             <option value={option}>{option}</option>
           ))}

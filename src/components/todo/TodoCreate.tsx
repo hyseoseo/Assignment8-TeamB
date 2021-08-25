@@ -7,7 +7,7 @@ interface ITodoCreateProps {
 }
 
 const TodoCreate: React.FC<ITodoCreateProps> = ({ createTodo }) => {
-  const { value, handleChange } = useInput();
+  const { value, handleChange } = useInput('');
 
   const handleClick = () => {
     createTodo(value);

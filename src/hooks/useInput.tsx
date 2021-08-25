@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
+import { Status } from 'components/todo/type';
 
 type ChangeEvent = React.ChangeEvent<HTMLInputElement | HTMLSelectElement>;
 
 interface IuseInput {
-  value: string;
+  value: string | Status;
   handleChange: (e: ChangeEvent) => void;
 }
 
-const useInput = (initialValue: string = ''): IuseInput => {
-  const [value, setValue] = useState<string>(initialValue);
+const useInput = (initialValue: string | Status): IuseInput => {
+  const [value, setValue] = useState<string | Status>(initialValue);
 
   const handleChange = (e: ChangeEvent): void => {
-    setValue(e.target.value);
+    const value: string | Status = e.target.value;
+    setValue(value);
   };
 
   return { value, handleChange };

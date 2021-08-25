@@ -1,12 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Status } from 'components/todo/type';
-
-type ChangeEvent = React.ChangeEvent<HTMLInputElement | HTMLSelectElement>;
-
-interface IuseInput {
-  value: string | Status;
-  handleChange: (e: ChangeEvent) => void;
-}
+import { ChangeEvent, IuseInput } from './types';
 
 const useInput = (initialValue: string | Status): IuseInput => {
   const [value, setValue] = useState<string | Status>(initialValue);

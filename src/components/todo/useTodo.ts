@@ -1,4 +1,3 @@
-import React from 'react';
 import { STORAGE_KEYS } from 'config';
 import { Status, Itodo } from './type';
 import useLocalStorage from 'hooks/useLocalStorage';
@@ -6,10 +5,7 @@ import useLocalStorage from 'hooks/useLocalStorage';
 const initialTodolist: Itodo[] = [];
 
 const useTodo = () => {
-  const [todos, setTodos] = useLocalStorage(
-    STORAGE_KEYS.todos,
-    initialTodolist,
-  );
+  const [todos, setTodos] = useLocalStorage(STORAGE_KEYS.todos, initialTodolist);
 
   const changeTodoStatus = (id: number, status: Status | string): void => {
     setTodos((prev) =>
@@ -26,9 +22,7 @@ const useTodo = () => {
   };
 
   const updateTodoId = (): void => {
-    setTodos((prev: Itodo[]) =>
-      prev.map((todo: Itodo, index) => ({ ...todo, id: index })),
-    );
+    setTodos((prev: Itodo[]) => prev.map((todo: Itodo, index) => ({ ...todo, id: index })));
   };
 
   const handleDeleteTodo = (id: number): void => {
@@ -50,6 +44,7 @@ const useTodo = () => {
 
   return {
     todos,
+    setTodos,
     changeTodoStatus,
     createTodo,
     handleDeleteTodo,

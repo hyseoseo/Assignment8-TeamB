@@ -6,13 +6,22 @@ import { Itodo } from "components/todo/useTodo";
 interface ITodoListProps {
   todos: Itodo[];
   removeTodo: (id: number) => void;
+  updateTodoId: () => void;
 }
 
-const TodoList: React.FC<ITodoListProps> = ({ todos, removeTodo }) => {
+const TodoList: React.FC<ITodoListProps> = ({
+  todos,
+  removeTodo,
+  updateTodoId,
+}) => {
   return (
     <ul css={ListContainer}>
       {todos.map((todo) => (
-        <TodoItem item={todo} removeTodo={removeTodo} />
+        <TodoItem
+          item={todo}
+          removeTodo={removeTodo}
+          updateTodoId={updateTodoId}
+        />
       ))}
     </ul>
   );

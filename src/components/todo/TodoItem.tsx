@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { css } from "@emotion/react";
-import { useState } from "react";
-import { Itodo, Status } from "components/todo/useTodo";
 import { OPTIONS } from "config";
+import { Itodo } from "components/todo/useTodo";
 import Todo from "./TodoHead";
 
 interface ITodoItemProps {
   //changeTodoStatus: (id: number, status: Status) => void;
   removeTodo: (id: number) => void;
+  updateTodoId: () => void;
   item: Itodo;
 }
 
-const TodoItem: React.FC<ITodoItemProps> = ({ item, removeTodo }) => {
+const TodoItem: React.FC<ITodoItemProps> = ({
+  item,
+  removeTodo,
+  updateTodoId,
+}) => {
+  const handleDeleteClick = (id: number) => {
+    removeTodo(id);
+    updateTodoId();
+  };
+
   return (
     <li css={ItemContainer}>
       <p css={TodoContent}>{item.taskName}</p>
@@ -22,7 +31,7 @@ const TodoItem: React.FC<ITodoItemProps> = ({ item, removeTodo }) => {
             <option value={option}>{option}</option>
           ))}
         </select>
-        <button css={DeleteButton} onClick={() => removeTodo(item.id)}>
+        <button css={DeleteButton} onClick={() => handleDeleteClick(item.id)}>
           삭제
         </button>
       </div>

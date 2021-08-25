@@ -1,8 +1,10 @@
 import React from "react";
 import useLocalStorage from "hooks/useLocalStorage";
 import { STORAGE_KEYS } from "config";
+import { Status } from "config";
+import Todo from "./TodoHead";
 
-export type Status = "완료" | "진행중" | "시작안함";
+//export type Status = "완료" | "진행중" | "시작안함";
 
 export interface Itodo {
   id: number;
@@ -31,16 +33,20 @@ const useTodo = () => {
   };
 
   const removeTodo = (id: number): void => {
-    const remains = todos.filter((todo: Itodo) => todo.id !== id);
-    remains.map((item, index) => (item.id = index));
-    setTodos(remains);
+    setTodos((prev: Itodo[]) => prev.filter((todo: Itodo) => todo.id !== id));
+  };
+
+  const updateTodoId = (): void => {
+    setTodos((prev: Itodo[]) =>
+      prev.map((todo: Itodo, index) => ({ ...todo, id: index }))
+    );
   };
 
   const createTodo = (value: string): void => {
     setTodos((prev) =>
       prev.concat({
         taskName: value,
-        status: "시작안함",
+        status: Status.notStarted,
         id: todos.length,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -53,6 +59,7 @@ const useTodo = () => {
     changeTodoStatus,
     removeTodo,
     createTodo,
+    updateTodoId,
   };
 };
 

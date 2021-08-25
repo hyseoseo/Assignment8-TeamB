@@ -7,12 +7,14 @@ interface ITodoListProps {
   todos: Itodo[];
   handleDeleteTodo: (id: number) => void;
   changeTodoStatus: (id: number, status: Status | string) => void;
+  changeTodoImportance: (id: number, importance: boolean) => void;
 }
 
 const TodoList: React.FC<ITodoListProps> = ({
   todos,
   handleDeleteTodo,
   changeTodoStatus,
+  changeTodoImportance,
 }) => {
   return (
     <ul css={ListContainer}>
@@ -21,6 +23,7 @@ const TodoList: React.FC<ITodoListProps> = ({
           item={todo}
           handleDeleteTodo={handleDeleteTodo}
           changeTodoStatus={changeTodoStatus}
+          changeTodoImportance={changeTodoImportance}
         />
       ))}
     </ul>

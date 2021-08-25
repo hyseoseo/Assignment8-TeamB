@@ -1,34 +1,50 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import { OPTIONS, Itodo, Status } from './type';
 import { useInput } from 'hooks';
 
 interface ITodoItemProps {
-  changeTodoStatus: (id: number, status: Status | string) => void;
   item: Itodo;
+  changeTodoStatus: (id: number, status: Status | string) => void;
   handleDeleteTodo: (id: number) => void;
+  changeTodoImportance: (id: number, importance: boolean) => void;
 }
 
 const TodoItem: React.FC<ITodoItemProps> = ({
   item,
   handleDeleteTodo,
   changeTodoStatus,
+  changeTodoImportance,
 }) => {
   const { value, handleChange } = useInput(item.status);
+  const [isImportant, setIsImportant] = useState(item.isImportant);
 
   const handleDeleteClick = (id: number) => {
     handleDeleteTodo(id);
+  };
+
+  const handleToggle = () => {
+    setIsImportant((prev) => !prev);
   };
 
   useEffect(() => {
     changeTodoStatus(item.id, value);
   }, [value]);
 
+  useEffect(() => {
+    changeTodoImportance(item.id, isImportant);
+  }, [isImportant]);
+
   return (
     <li css={ItemContainer}>
       <p css={TodoContent}>{item.taskName}</p>
       <div css={TodoInfo}>
-        <button css={StarRed}>★</button>
+        <button
+          css={item.isImportant ? StarRed : StarWhite}
+          onClick={handleToggle}
+        >
+          ★
+        </button>
         <select value={item.status} onChange={handleChange}>
           {OPTIONS.map((option) => (
             <option value={option}>{option}</option>

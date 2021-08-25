@@ -7,7 +7,7 @@ interface ITodoItemProps {
   item: Itodo;
   changeTodoStatus: (id: number, status: Status | string) => void;
   handleDeleteTodo: (id: number) => void;
-  changeTodoImportance: (id: number, importance: boolean) => void;
+  changeTodoImportance: (id: number) => void;
 }
 
 const TodoItem: React.FC<ITodoItemProps> = ({
@@ -17,23 +17,14 @@ const TodoItem: React.FC<ITodoItemProps> = ({
   changeTodoImportance,
 }) => {
   const { value, handleChange } = useInput(item.status);
-  const [isImportant, setIsImportant] = useState(item.isImportant);
 
   const handleDeleteClick = (id: number) => {
     handleDeleteTodo(id);
   };
 
-  const handleToggle = () => {
-    setIsImportant((prev) => !prev);
-  };
-
   useEffect(() => {
     changeTodoStatus(item.id, value);
   }, [value]);
-
-  useEffect(() => {
-    changeTodoImportance(item.id, isImportant);
-  }, [isImportant]);
 
   return (
     <li css={ItemContainer}>
@@ -41,7 +32,7 @@ const TodoItem: React.FC<ITodoItemProps> = ({
       <div css={TodoInfo}>
         <button
           css={item.isImportant ? StarRed : StarWhite}
-          onClick={handleToggle}
+          onClick={() => changeTodoImportance(item.id)}
         >
           ★
         </button>
@@ -50,7 +41,6 @@ const TodoItem: React.FC<ITodoItemProps> = ({
             <option value={option}>{option}</option>
           ))}
         </select>
-        {console.log(value)}
         <button css={DeleteButton} onClick={() => handleDeleteClick(item.id)}>
           삭제
         </button>

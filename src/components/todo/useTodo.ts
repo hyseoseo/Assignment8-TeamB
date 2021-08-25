@@ -21,12 +21,15 @@ const useTodo = () => {
     );
   };
 
-  const changeTodoImportance = (id: number, importance: boolean): void => {
+  const changeTodoImportance = (id: number): void => {
     setTodos((prev) =>
       prev.map((todo: Itodo) => {
-        return todo.id === id
-          ? { ...todo, updatedAt: new Date(), isImportant: importance }
-          : todo;
+        if (todo.id !== id) return todo;
+        return {
+          ...todo,
+          updatedAt: new Date(),
+          isImportant: !todo.isImportant,
+        };
       }),
     );
   };

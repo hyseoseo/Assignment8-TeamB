@@ -7,7 +7,7 @@ interface ITodoListProps {
   todos: Itodo[];
   handleDeleteTodo: (id: number) => void;
   changeTodoStatus: (id: number, status: Status | string) => void;
-  changeTodoImportance: (id: number, importance: boolean) => void;
+  changeTodoImportance: (id: number) => void;
 }
 
 const TodoList: React.FC<ITodoListProps> = ({

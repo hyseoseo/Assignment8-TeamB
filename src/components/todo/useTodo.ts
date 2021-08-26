@@ -17,6 +17,19 @@ const useTodo = () => {
     );
   };
 
+  const changeTodoImportance = (id: number): void => {
+    setTodos((prev) =>
+      prev.map((todo: Itodo) => {
+        if (todo.id !== id) return todo;
+        return {
+          ...todo,
+          updatedAt: new Date(),
+          isImportant: !todo.isImportant,
+        };
+      }),
+    );
+  };
+
   const removeTodo = (id: number): void => {
     setTodos((prev: Itodo[]) => prev.filter((todo: Itodo) => todo.id !== id));
   };
@@ -38,6 +51,7 @@ const useTodo = () => {
         id: todos.length,
         createdAt: new Date(),
         updatedAt: new Date(),
+        isImportant: false,
       }),
     );
   };
@@ -48,6 +62,7 @@ const useTodo = () => {
     changeTodoStatus,
     createTodo,
     handleDeleteTodo,
+    changeTodoImportance,
   };
 };
 

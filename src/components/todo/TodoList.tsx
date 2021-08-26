@@ -9,6 +9,7 @@ interface ITodoListProps {
   setTodos: React.Dispatch<React.SetStateAction<Itodo[]>>;
   handleDeleteTodo: (id: number) => void;
   changeTodoStatus: (id: number, status: Status | string) => void;
+  changeTodoImportance: (id: number) => void;
 }
 
 const TodoList: React.FC<ITodoListProps> = ({
@@ -16,6 +17,7 @@ const TodoList: React.FC<ITodoListProps> = ({
   setTodos,
   handleDeleteTodo,
   changeTodoStatus,
+  changeTodoImportance,
 }) => {
   const { handleDragStart, handleDragEnter, handleDragOver, handleDragEnd } = useDnD(
     todos,
@@ -35,6 +37,7 @@ const TodoList: React.FC<ITodoListProps> = ({
           handleDragEnd={handleDragEnd}
           handleDeleteTodo={handleDeleteTodo}
           changeTodoStatus={changeTodoStatus}
+          changeTodoImportance={changeTodoImportance}
         />
       ))}
     </ul>

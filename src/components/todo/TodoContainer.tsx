@@ -1,6 +1,8 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import { TodoList, TodoHead, useTodo } from 'components/todo';
+import useFilter from 'hooks/useFilter';
+import Filter from './Filter';
 
 const TodoContainer: React.FC = () => {
   const {
@@ -12,14 +14,18 @@ const TodoContainer: React.FC = () => {
     changeTodoImportance,
     sortTodo,
   } = useTodo();
-
-  console.log(todos);
+  const { filteredItem, filterOption, filterClicked, handleCheck, setFilteredResult } =
+    useFilter(todos);
 
   return (
     <div css={TodoTemplate}>
       <TodoHead createTodo={createTodo} sortTodo={sortTodo} />
+      <Filter handleCheck={handleCheck} setFilteredResult={setFilteredResult} />
       <TodoList
         todos={todos}
+        filteredItem={filteredItem}
+        filterOption={filterOption}
+        filterClicked={filterClicked}
         setTodos={setTodos}
         handleDeleteTodo={handleDeleteTodo}
         changeTodoStatus={changeTodoStatus}

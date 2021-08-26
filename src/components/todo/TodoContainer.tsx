@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { TodoList, TodoHead, TodoFooter, useTodo } from 'components/todo';
+import { Itodo, Status } from './type';
+import { TodoList, TodoHead, useTodo } from 'components/todo';
 
 const TodoContainer: React.FC = () => {
   const {
@@ -13,6 +14,8 @@ const TodoContainer: React.FC = () => {
     sortTodo,
   } = useTodo();
 
+  const undoneTodos: Itodo[] = todos.filter((todo) => todo.status !== Status.completed);
+
   return (
     <div css={TodoTemplate}>
       <TodoHead createTodo={createTodo} sortTodo={sortTodo} />
@@ -23,7 +26,6 @@ const TodoContainer: React.FC = () => {
         changeTodoStatus={changeTodoStatus}
         changeTodoImportance={changeTodoImportance}
       />
-      <TodoFooter todos={todos} />
     </div>
   );
 };

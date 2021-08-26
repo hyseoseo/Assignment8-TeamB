@@ -1,5 +1,6 @@
 import { STORAGE_KEYS } from 'config';
 import { Status, Itodo } from './type';
+import { sortDate } from 'utils/sortDate';
 import useLocalStorage from 'hooks/useLocalStorage';
 
 const initialTodolist: Itodo[] = [];
@@ -54,6 +55,17 @@ const useTodo = () => {
     );
   };
 
+  const sortTodo = (): void => {
+    setTodos((prev) =>
+      prev.sort((a: Itodo, b: Itodo) => {
+        if (sortDate(a.createdAt, b.createdAt) < 0) return -1;
+        if (sortDate(a.createdAt, b.createdAt) > 0) return 1;
+        return 0;
+      }),
+    );
+    updateTodoId();
+  };
+
   return {
     todos,
     setTodos,
@@ -61,6 +73,7 @@ const useTodo = () => {
     createTodo,
     handleDeleteTodo,
     changeTodoImportance,
+    sortTodo,
   };
 };
 

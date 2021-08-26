@@ -2,6 +2,8 @@ import React from 'react';
 import { css } from '@emotion/react';
 import { Itodo, Status } from './type';
 import { TodoList, TodoHead, useTodo } from 'components/todo';
+import useFilter from 'hooks/useFilter';
+import Filter from './Filter';
 
 const TodoContainer: React.FC = () => {
   const {
@@ -15,12 +17,18 @@ const TodoContainer: React.FC = () => {
   } = useTodo();
 
   const undoneTodos: Itodo[] = todos.filter((todo) => todo.status !== Status.completed);
+  const { filteredItem, filterOption, filterClicked, handleCheck, setFilteredResult } =
+    useFilter(todos);
 
   return (
     <div css={TodoTemplate}>
       <TodoHead createTodo={createTodo} sortTodo={sortTodo} />
+      <Filter handleCheck={handleCheck} setFilteredResult={setFilteredResult} />
       <TodoList
         todos={todos}
+        filteredItem={filteredItem}
+        filterOption={filterOption}
+        filterClicked={filterClicked}
         setTodos={setTodos}
         handleDeleteTodo={handleDeleteTodo}
         changeTodoStatus={changeTodoStatus}

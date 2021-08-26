@@ -13,6 +13,7 @@ interface Iprop {
   handleDragEnd: (setIsDragOver: SetState<boolean>) => void;
   handleDeleteTodo: (id: number) => void;
   changeTodoStatus: (id: number, status: Status | string) => void;
+  changeTodoImportance: (id: number) => void;
 }
 
 const TodoItem: React.FC<Iprop> = ({ ...props }) => {
@@ -26,6 +27,7 @@ const TodoItem: React.FC<Iprop> = ({ ...props }) => {
     handleDragEnd,
     handleDeleteTodo,
     changeTodoStatus,
+    changeTodoImportance,
   } = props;
 
   return (
@@ -42,6 +44,7 @@ const TodoItem: React.FC<Iprop> = ({ ...props }) => {
         todo={todo}
         handleDeleteTodo={handleDeleteTodo}
         changeTodoStatus={changeTodoStatus}
+        changeTodoImportance={changeTodoImportance}
       />
     </li>
   );

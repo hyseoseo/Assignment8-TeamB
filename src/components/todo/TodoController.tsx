@@ -7,9 +7,15 @@ interface Iprop {
   todo: Itodo;
   handleDeleteTodo: (id: number) => void;
   changeTodoStatus: (id: number, status: Status | string) => void;
+  changeTodoImportance: (id: number) => void;
 }
 
-const TodoController: React.FC<Iprop> = ({ handleDeleteTodo, todo, changeTodoStatus }) => {
+const TodoController: React.FC<Iprop> = ({
+  handleDeleteTodo,
+  todo,
+  changeTodoStatus,
+  changeTodoImportance,
+}) => {
   const { value, handleChange } = useInput(todo.status);
 
   useEffect(() => {
@@ -18,7 +24,12 @@ const TodoController: React.FC<Iprop> = ({ handleDeleteTodo, todo, changeTodoSta
 
   return (
     <div css={TodoInfo}>
-      <button css={StarRed}>★</button>
+      <button
+        css={todo.isImportant ? StarRed : StarWhite}
+        onClick={() => changeTodoImportance(todo.id)}
+      >
+        ★
+      </button>
       <select value={todo.status} onChange={handleChange}>
         {OPTIONS.map((option, index) => (
           <option key={index} value={option}>

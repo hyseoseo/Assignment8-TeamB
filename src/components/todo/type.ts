@@ -14,19 +14,3 @@ export interface Itodo {
 }
 
 export const OPTIONS = [Status.notStarted, Status.onGoing, Status.completed];
-
-export const FILTER_ARRAY_ISIMPORTANT = [
-  {
-    label: '중요함',
-    value: 'true',
-  },
-  {
-    label: '안 중요함',
-    value: 'false',
-  },
-];
-
-export const FILTER_OPTION = {
-  STATUS: 'status',
-  IMPORTANT: 'important',
-};

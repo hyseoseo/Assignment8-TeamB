@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Itodo, OPTIONS, Status } from 'components/todo/type';
-import { FILTER_OPTION } from 'components/todo/type';
+import { FILTER_OPTION } from 'config';
 
 interface IfilterOption {
   status: Status[];

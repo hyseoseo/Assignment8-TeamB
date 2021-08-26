@@ -1,7 +1,7 @@
 import React from 'react';
 import useFilter from 'hooks/useFilter';
 import { Itodo, OPTIONS } from 'components/todo/type';
-import { FILTER_OPTION, FILTER_ARRAY_ISIMPORTANT } from 'components/todo/type';
+import { FILTER_OPTION } from 'config';
 
 interface filterProps {
   todos: Itodo[];
@@ -11,8 +11,8 @@ const Filter: React.FC<filterProps> = ({ todos }) => {
   const { handleCheck, handleSubmit } = useFilter(todos);
 
   return (
-    <>
-      <div>
+    <form onSubmit={handleSubmit}>
+      <fieldset>
         {OPTIONS.map((option) => (
           <label>
             <input
@@ -24,8 +24,8 @@ const Filter: React.FC<filterProps> = ({ todos }) => {
             {option}
           </label>
         ))}
-      </div>
-      <div>
+      </fieldset>
+      <fieldset>
         {FILTER_ARRAY_ISIMPORTANT.map((item) => (
           <label>
             <input
@@ -37,12 +37,21 @@ const Filter: React.FC<filterProps> = ({ todos }) => {
             {item.label}
           </label>
         ))}
-      </div>
-      <button type="submit" onClick={handleSubmit}>
-        정렬
-      </button>
-    </>
+      </fieldset>
+      <button type="submit">필터</button>
+    </form>
   );
 };
 
 export default Filter;
+
+const FILTER_ARRAY_ISIMPORTANT = [
+  {
+    label: '중요함',
+    value: 'true',
+  },
+  {
+    label: '안 중요함',
+    value: 'false',
+  },
+];

@@ -44,10 +44,6 @@ const CreateContainer = css`
   width: 100%;
   background-color: rgba(74, 215, 144, 0.5);
   padding: 20px 40px;
-  & h2 {
-    padding-bottom: 15px;
-    font-size: 1.1rem;
-  }
 `;
 
 const TodoInput = css`

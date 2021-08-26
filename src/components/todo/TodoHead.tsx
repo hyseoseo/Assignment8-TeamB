@@ -8,9 +8,10 @@ import { TodoCreate } from 'components/todo';
 
 interface ITodoHeadProps {
   createTodo: (value: string) => void;
+  sortTodo: () => void;
 }
 
-const TodoHead: React.FC<ITodoHeadProps> = ({ createTodo }) => {
+const TodoHead: React.FC<ITodoHeadProps> = ({ createTodo, sortTodo }) => {
   const { isVisible, openModal, closeModal } = useModal();
 
   const handleClickFilter = (): void => {
@@ -25,6 +26,7 @@ const TodoHead: React.FC<ITodoHeadProps> = ({ createTodo }) => {
       </button>
       <Modal ModalComponent={FilterModal} isVisible={isVisible} closeModal={closeModal} />
       <TodoCreate createTodo={createTodo} />
+      <button onClick={sortTodo}>생성일 순 정렬</button>
     </header>
   );
 };

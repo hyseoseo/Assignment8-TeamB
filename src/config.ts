@@ -10,3 +10,8 @@ export const dateOptions: Intl.DateTimeFormatOptions = {
   month: 'long',
   day: 'numeric',
 };
+
+export const FILTER_OPTION = {
+  STATUS: 'status',
+  IMPORTANT: 'important',
+};

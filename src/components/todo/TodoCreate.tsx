@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { css } from '@emotion/react';
-import { useInput, useModal } from 'hooks';
-import { FilterModal, ErrorModal } from 'components/modals';
-import { Modal } from 'components';
+import { useModalContext } from 'contexts';
+import { useInput } from 'hooks';
+import { ErrorModal } from 'components/modals';
 
 interface ITodoCreateProps {
   createTodo: (value: string) => void;
@@ -10,13 +10,13 @@ interface ITodoCreateProps {
 
 const TodoCreate: React.FC<ITodoCreateProps> = ({ createTodo }) => {
   const { value, clearValue, handleChange } = useInput('');
-  const { isVisible, openModal, closeModal } = useModal();
+  const { openModal } = useModalContext()!;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
     if (value === '') {
-      openModal();
+      openModal(ErrorModal);
       return;
     }
 
@@ -33,7 +33,6 @@ const TodoCreate: React.FC<ITodoCreateProps> = ({ createTodo }) => {
         placeholder="할 일을 적어주세요"
       />
       <button css={AddButton}>추가</button>
-      <Modal ModalComponent={ErrorModal} isVisible={isVisible} closeModal={closeModal} />
     </form>
   );
 };

@@ -1,3 +1,5 @@
+import React from 'react';
+
 export type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
 export type SetStateArr<T> = React.Dispatch<React.SetStateAction<T[]>>;
 export type UseStorage<T> = [T, React.Dispatch<React.SetStateAction<T>>];
@@ -18,6 +20,7 @@ export interface IuseDnD {
 
 export interface IuseModal {
   isVisible: boolean;
-  openModal: () => void;
+  ModalComponent: React.FC | null;
+  openModal: (component: React.FC) => void;
   closeModal: () => void;
 }

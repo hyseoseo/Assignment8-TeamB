@@ -5,13 +5,15 @@ import { TodoCreate } from 'components/todo';
 
 interface ITodoHeadProps {
   createTodo: (value: string) => void;
+  sortTodo: () => void;
 }
 
-const TodoHead: React.FC<ITodoHeadProps> = ({ createTodo }) => {
+const TodoHead: React.FC<ITodoHeadProps> = ({ createTodo, sortTodo }) => {
   return (
     <header css={HeadBlock}>
       <h1 css={Time}>{getCurrentDate()}</h1>
       <TodoCreate createTodo={createTodo} />
+      <button onClick={sortTodo}>생성일 순 정렬</button>
     </header>
   );
 };

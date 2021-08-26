@@ -10,9 +10,7 @@ const useTodo = () => {
   const changeTodoStatus = (id: number, status: Status | string): void => {
     setTodos((prev) =>
       prev.map((todo: Itodo) => {
-        return todo.id === id
-          ? { ...todo, updatedAt: new Date(), status: status }
-          : todo;
+        return todo.id === id ? { ...todo, updatedAt: new Date(), status: status } : todo;
       }),
     );
   };

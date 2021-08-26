@@ -39,7 +39,7 @@ const TodoItem: React.FC<Iprop> = ({ ...props }) => {
       onDragOver={(e) => handleDragOver(e, setIsDragOver)}
       onDragEnd={() => handleDragEnd(setIsDragOver)}
     >
-      <p css={Content}>{todo.taskName}</p>
+      <p css={todo.status === Status.completed ? CompletedContent : Content}>{todo.taskName}</p>
       <TodoController
         todo={todo}
         handleDeleteTodo={handleDeleteTodo}
@@ -69,4 +69,10 @@ const ListHover = css`
 
 const Content = css`
   padding: 10px 0;
+`;
+
+const CompletedContent = css`
+  color: gray;
+  padding: 10px 0;
+  text-decoration: line-through;
 `;

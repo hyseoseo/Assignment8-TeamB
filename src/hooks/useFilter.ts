@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Itodo, OPTIONS, Status } from 'components/todo/type';
+import { IfilterOption } from './types';
 import { FILTER_OPTION } from 'config';
-
-interface IfilterOption {
-  status: Status[];
-  isImportant: string[];
-}
 
 const InitialFilterOption: IfilterOption = {
   status: [],
@@ -15,6 +11,7 @@ const InitialFilterOption: IfilterOption = {
 const useFilter = (todos: Itodo[]) => {
   const [filteredItem, setFilteredItem] = useState<Itodo[]>([]);
   const [filterOption, setFilterOption] = useState<IfilterOption>(InitialFilterOption);
+  const [filterClicked, setFilterClicked] = useState<boolean>(false);
 
   const changeIntoStatus = (value: string): Status => {
     const status: Status = OPTIONS.find((option) => option === value)!;
@@ -48,6 +45,13 @@ const useFilter = (todos: Itodo[]) => {
     } else {
       setFilterImportant(e.target.value, e.target.checked);
     }
+    setClickedFalse();
+  };
+
+  const setClickedFalse = () => {
+    if (filterOption.status.length == 0 && filterOption.isImportant.length == 0) {
+      setFilterClicked(false);
+    }
   };
 
   const filteredTodos = (filter: string, todos: Itodo[]): Itodo[] => {
@@ -58,7 +62,7 @@ const useFilter = (todos: Itodo[]) => {
         );
   };
 
-  const handleSubmit = () => {
+  const setFilteredResult = () => {
     let filteredTodo: Itodo[] = [];
     if (!filterOption.isImportant.length) {
       filteredTodo = filteredTodos(FILTER_OPTION.STATUS, todos);
@@ -70,9 +74,17 @@ const useFilter = (todos: Itodo[]) => {
         .filter((item: Itodo) => filterOption.isImportant.includes(item.isImportant.toString()));
     }
     setFilteredItem(filteredTodo);
+    setFilterClicked(true);
   };
 
-  return { handleCheck, handleSubmit };
+  return {
+    filteredItem,
+    filterOption,
+    filterClicked,
+    setFilteredItem,
+    handleCheck,
+    setFilteredResult,
+  };
 };
 
 export default useFilter;

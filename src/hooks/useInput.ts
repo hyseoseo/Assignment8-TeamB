@@ -10,7 +10,11 @@ const useInput = (initialValue: string | Status): IuseInput => {
     setValue(value);
   };
 
-  return { value, handleChange };
+  const clearValue = (): void => {
+    setValue('');
+  };
+
+  return { value, clearValue, handleChange };
 };
 
 export default useInput;

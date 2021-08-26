@@ -1,32 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { css } from '@emotion/react';
-import useInput from 'hooks/useInput';
+import { useInput, useModal } from 'hooks';
+import { FilterModal, ErrorModal } from 'components/modals';
+import { Modal } from 'components';
 
 interface ITodoCreateProps {
   createTodo: (value: string) => void;
 }
 
 const TodoCreate: React.FC<ITodoCreateProps> = ({ createTodo }) => {
-  const { value, handleChange } = useInput('');
+  const { value, clearValue, handleChange } = useInput('');
+  const { isVisible, openModal, closeModal } = useModal();
 
-  const handleClick = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+
+    if (value === '') {
+      openModal();
+      return;
+    }
+
     createTodo(value);
+    clearValue();
   };
 
   return (
-    <article css={CreateContainer}>
-      <div>
-        <input
-          value={value}
-          onChange={handleChange}
-          css={TodoInput}
-          placeholder="할 일을 적어주세요"
-        />
-        <button css={AddButton} onClick={handleClick}>
-          추가
-        </button>
-      </div>
-    </article>
+    <form css={CreateContainer} onSubmit={handleSubmit}>
+      <input
+        value={value}
+        onChange={handleChange}
+        css={TodoInput}
+        placeholder="할 일을 적어주세요"
+      />
+      <button css={AddButton}>추가</button>
+      <Modal ModalComponent={ErrorModal} isVisible={isVisible} closeModal={closeModal} />
+    </form>
   );
 };
 

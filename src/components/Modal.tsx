@@ -1,20 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { css } from '@emotion/react';
+import { useModalContext } from 'contexts/ModalContext';
 
-interface Imodal {
-  ModalComponent: React.FC;
-  isVisible: boolean;
-  closeModal: () => void;
-}
+const Modal: React.FC = () => {
+  const { isVisible, closeModal, ModalComponent } = useModalContext()!;
 
-const Modal: React.FC<Imodal> = ({ ModalComponent, isVisible, closeModal }) =>
-  isVisible
+  return isVisible
     ? ReactDOM.createPortal(
         <>
           <div css={Overlay} onClick={closeModal}></div>
           <div css={ModalWrapper}>
-            <ModalComponent />
+            {ModalComponent}
             <button type="button" css={CloseBtn} onClick={closeModal}>
               <span>X</span>
             </button>
@@ -23,6 +20,7 @@ const Modal: React.FC<Imodal> = ({ ModalComponent, isVisible, closeModal }) =>
         document.getElementById('portal') as HTMLDivElement,
       )
     : null;
+};
 
 export default Modal;
 

@@ -1,6 +1,9 @@
 import React from 'react';
 import { css } from '@emotion/react';
+import { useModal } from 'hooks';
 import { getCurrentDate } from 'utils/getCurrentDate';
+import { Modal } from 'components';
+import { FilterModal } from 'components/modals';
 import { TodoCreate } from 'components/todo';
 
 interface ITodoHeadProps {
@@ -9,9 +12,19 @@ interface ITodoHeadProps {
 }
 
 const TodoHead: React.FC<ITodoHeadProps> = ({ createTodo, sortTodo }) => {
+  const { isVisible, openModal, closeModal } = useModal();
+
+  const handleClickFilter = (): void => {
+    openModal();
+  };
+
   return (
     <header css={HeadBlock}>
       <h1 css={Time}>{getCurrentDate()}</h1>
+      <button onClick={handleClickFilter}>
+        <span>filter modal</span>
+      </button>
+      <Modal ModalComponent={FilterModal} isVisible={isVisible} closeModal={closeModal} />
       <TodoCreate createTodo={createTodo} />
       <button onClick={sortTodo}>생성일 순 정렬</button>
     </header>

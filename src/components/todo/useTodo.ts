@@ -1,7 +1,7 @@
 import { STORAGE_KEYS } from 'config';
+import { useLocalStorage } from 'hooks';
+import { sortDate } from 'utils';
 import { Status, Itodo } from './type';
-import { sortDate } from 'utils/sortDate';
-import useLocalStorage from 'hooks/useLocalStorage';
 
 const initialTodolist: Itodo[] = [];
 

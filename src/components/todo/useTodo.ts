@@ -10,9 +10,20 @@ const useTodo = () => {
   const changeTodoStatus = (id: number, status: Status | string): void => {
     setTodos((prev) =>
       prev.map((todo: Itodo) => {
-        return todo.id === id
-          ? { ...todo, updatedAt: new Date(), status: status }
-          : todo;
+        return todo.id === id ? { ...todo, updatedAt: new Date(), status: status } : todo;
+      }),
+    );
+  };
+
+  const changeTodoImportance = (id: number): void => {
+    setTodos((prev) =>
+      prev.map((todo: Itodo) => {
+        if (todo.id !== id) return todo;
+        return {
+          ...todo,
+          updatedAt: new Date(),
+          isImportant: !todo.isImportant,
+        };
       }),
     );
   };

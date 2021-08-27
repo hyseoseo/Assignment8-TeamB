@@ -1,7 +1,7 @@
 export enum Status {
-  notStarted = 'To do',
-  onGoing = 'In progress',
-  completed = 'Done',
+  todo = 'To do',
+  progress = 'In progress',
+  done = 'Done',
 }
 
 export interface Itodo {
@@ -13,4 +13,4 @@ export interface Itodo {
   isImportant: boolean;
 }
 
-export const OPTIONS = [Status.notStarted, Status.onGoing, Status.completed];
+export const OPTIONS = [Status.todo, Status.progress, Status.done];

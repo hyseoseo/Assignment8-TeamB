@@ -1,7 +1,7 @@
 # ModuCompany Todo-List-App 과제
 
 ## 데모 링크
-https://confident-bassi-6ef343.netlify.app
+https://moducompany-todolist.netlify.app/
 
 ## 실행 방법
 패키지 매니저 npm 사용

@@ -32,7 +32,7 @@ const TodoItem: React.FC<Iprop> = ({ ...props }) => {
 
   return (
     <li
-      css={isDragOver ? ListHover : List}
+      css={isDragOver ? (todo.visible ? ListHover : noDisplay) : todo.visible ? List : noDisplay}
       draggable
       onDragStart={() => handleDragStart(index)}
       onDragEnter={() => handleDragEnter(index)}
@@ -67,6 +67,9 @@ const ListHover = css`
   background-color: #666;
 `;
 
+const noDisplay = css`
+  display: none;
+`;
 const Content = css`
   padding: 10px 0;
 `;

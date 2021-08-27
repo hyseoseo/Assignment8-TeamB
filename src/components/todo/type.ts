@@ -11,6 +11,7 @@ export interface Itodo {
   createdAt: Date;
   updatedAt: Date;
   isImportant: boolean;
+  visible: boolean;
 }
 
 export const OPTIONS = [Status.notStarted, Status.onGoing, Status.completed];

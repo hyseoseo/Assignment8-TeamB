@@ -51,6 +51,7 @@ const useTodo = () => {
         createdAt: new Date(),
         updatedAt: new Date(),
         isImportant: false,
+        visible: true,
       }),
     );
   };
@@ -66,6 +67,18 @@ const useTodo = () => {
     updateTodoId();
   };
 
+  const changeVisibility = (id: number): void => {
+    setTodos((prev) =>
+      prev.map((todo: Itodo) => {
+        if (todo.id !== id) return todo;
+        return {
+          ...todo,
+          visible: !todo.visible,
+        };
+      }),
+    );
+  };
+
   return {
     todos,
     setTodos,
@@ -74,6 +87,7 @@ const useTodo = () => {
     handleDeleteTodo,
     changeTodoImportance,
     sortTodo,
+    changeVisibility,
   };
 };
 

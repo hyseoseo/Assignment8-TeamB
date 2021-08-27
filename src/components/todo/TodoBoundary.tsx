@@ -10,7 +10,7 @@ const TodoBoundary: React.FC<Iprop> = ({ undoneTasks }) => {
   return (
     <div css={Wrapper}>
       <span css={TextContainer}>
-        <p css={Text}>{undoneTasks} tasks left to do</p>
+        <p css={Text}>{undoneTasks} tasks left</p>
       </span>
     </div>
   );

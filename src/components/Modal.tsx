@@ -30,10 +30,8 @@ const Modal: React.FC = () => {
             <div css={ContentsContainer}>
               <h1 css={Heading}>{title}</h1>
               {task ? (
-                <p css={Paragraph}>
-                  "<span css={Task}>{task}</span>"
-                  <br />
-                  <small css={TaskInfo}>{taskInfo}.</small>
+                <p css={ParagraphDelete}>
+                  "<span css={Task}>{task}</span>"<small css={TaskInfo}>{taskInfo}.</small>
                 </p>
               ) : (
                 <p css={Paragraph}>{content}</p>
@@ -103,13 +101,20 @@ const Paragraph = css`
   font-size: ${FONT_SIZE_STYLE.medium};
 `;
 
+const ParagraphDelete = css`
+  text-align: center;
+  font-size: ${FONT_SIZE_STYLE.medium};
+`;
+
 const Task = css`
   color: ${COLOR_STYLE.primary};
 `;
 
 const TaskInfo = css`
+  display: block;
   color: ${COLOR_STYLE.greyDarkest};
   font-size: ${FONT_SIZE_STYLE.small};
+  margin-top: 0.6rem;
 `;
 
 const Icon = css`
@@ -159,6 +164,6 @@ const BtnDelete = css`
   }
 
   &:hover {
-    transform: translate(-50%, -55%);
+    transform: translate(-25%, -55%);
   }
 `;

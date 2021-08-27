@@ -49,7 +49,7 @@ const TodoItem: React.FC<Iprop> = ({ ...props }) => {
       ...MODAL_OPTION.DELETE,
       content: '',
       task: todo.taskName,
-      taskInfo: `(${todo.status}${todo.isImportant ? ', Bookmark' : ''}) updated 5 mins ago`,
+      taskInfo: `${todo.status}${todo.isImportant ? ', Bookmark' : ''}, updated ${time} ago`,
       onOk() {
         handleDeleteTodo(todo.id);
       },
@@ -69,12 +69,14 @@ const TodoItem: React.FC<Iprop> = ({ ...props }) => {
       <button css={DeleteButton} onClick={handleRemove}>
         <IoMdRemoveCircleOutline />
       </button>
-      <TodoController
-        todo={todo}
-        changeTodoStatus={changeTodoStatus}
-        changeTodoImportance={changeTodoImportance}
-      />
-      <p>updated {time} ago</p>
+      <div css={ControlBox}>
+        <TodoController
+          todo={todo}
+          changeTodoStatus={changeTodoStatus}
+          changeTodoImportance={changeTodoImportance}
+        />
+        <small css={LastUpdate}>Updated {time} ago</small>
+      </div>
     </li>
   );
 };
@@ -163,4 +165,16 @@ const DeleteButton = css`
       transform: rotate(-90deg);
     }
   }
+`;
+
+const ControlBox = css`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+`;
+
+const LastUpdate = css`
+  color: ${COLOR_STYLE.greyDarkest};
+  font-size: ${FONT_SIZE_STYLE.smaller};
+  transform: translateY(-3px);
 `;

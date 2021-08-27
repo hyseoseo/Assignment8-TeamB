@@ -17,8 +17,8 @@ const Filter: React.FC<IfilterProps> = ({ handleCheck, setFilteredResult }) => {
   return (
     <form onSubmit={handleSubmit}>
       <fieldset css={fieldset}>
-        {OPTIONS.map((option) => (
-          <label>
+        {OPTIONS.map((option, index) => (
+          <label key={index}>
             <input
               type="checkbox"
               name={FILTER_OPTION.STATUS}
@@ -30,8 +30,8 @@ const Filter: React.FC<IfilterProps> = ({ handleCheck, setFilteredResult }) => {
         ))}
       </fieldset>
       <fieldset css={fieldset}>
-        {FILTER_ARRAY_ISIMPORTANT.map((item) => (
-          <label>
+        {FILTER_ARRAY_ISIMPORTANT.map((item, index) => (
+          <label key={index}>
             <input
               type="checkbox"
               name={FILTER_OPTION.IMPORTANT}

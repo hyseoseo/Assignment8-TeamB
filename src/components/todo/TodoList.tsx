@@ -12,7 +12,7 @@ interface ITodoListProps {
   filterClicked: boolean;
   setTodos: React.Dispatch<React.SetStateAction<Itodo[]>>;
   handleDeleteTodo: (id: number) => void;
-  changeTodoStatus: (id: number, status: Status | string) => void;
+  changeTodoStatus: (id: number, status: Status) => void;
   changeTodoImportance: (id: number) => void;
 }
 
@@ -31,7 +31,10 @@ const TodoList: React.FC<ITodoListProps> = ({
     setTodos,
   );
 
-  if (filterClicked && (filterOption.status.length != 0 || filterOption.isImportant.length != 0)) {
+  if (
+    filterClicked &&
+    (filterOption.status.length !== 0 || filterOption.isImportant.length !== 0)
+  ) {
     return (
       <ul css={Container}>
         {filteredItem.map((todo, index) => (
@@ -75,6 +78,5 @@ const TodoList: React.FC<ITodoListProps> = ({
 export default TodoList;
 
 const Container = css`
-  padding: 10px 0 30px 0;
-  overflow-y: auto;
+  overflow-y: scroll;
 `;

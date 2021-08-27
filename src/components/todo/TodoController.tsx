@@ -1,83 +1,76 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { css } from '@emotion/react';
-import { useInput } from 'hooks';
+import { ButtonDefault, COLOR_STYLE, FONT_SIZE_STYLE } from 'styles';
 import { OPTIONS, Itodo, Status } from './type';
 
 interface Iprop {
   todo: Itodo;
-  handleDeleteTodo: (id: number) => void;
-  changeTodoStatus: (id: number, status: Status | string) => void;
+  changeTodoStatus: (id: number, status: Status) => void;
   changeTodoImportance: (id: number) => void;
 }
 
-const TodoController: React.FC<Iprop> = ({
-  handleDeleteTodo,
-  todo,
-  changeTodoStatus,
-  changeTodoImportance,
-}) => {
-  const { value, handleChange } = useInput(todo.status);
+const TodoController: React.FC<Iprop> = ({ todo, changeTodoStatus, changeTodoImportance }) => {
+  const [status, setStatus] = useState<Status>(todo.status);
 
-  useEffect(() => {
-    changeTodoStatus(todo.id, value);
-  }, [value]);
+  const handleClick = (status: Status): void => {
+    setStatus(status);
+    changeTodoStatus(todo.id, status);
+  };
 
   return (
-    <div css={TodoInfo}>
+    <div css={Container}>
       <button
-        css={todo.isImportant ? StarRed : StarWhite}
+        css={todo.isImportant ? SelectedButton : Button}
         onClick={() => changeTodoImportance(todo.id)}
       >
-        ★
+        <span css={status === 'Done' && Done}>Bookmark</span>
       </button>
-      <select value={todo.status} onChange={handleChange}>
-        {OPTIONS.map((option, index) => (
-          <option key={index} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
-      <button css={DeleteButton} onClick={() => handleDeleteTodo(todo.id)}>
-        삭제
-      </button>
+      {OPTIONS.map((option, index) => (
+        <button
+          type="button"
+          key={index}
+          css={option === status ? SelectedButton : Button}
+          onClick={() => handleClick(option)}
+        >
+          <span css={status === 'Done' && Done}>{option}</span>
+        </button>
+      ))}
     </div>
   );
 };
 
 export default TodoController;
 
-const StarWhite = css`
-  font-size: 2rem;
-  color: #fff;
-  cursor: pointer;
-  background: inherit;
-  border: none;
-  box-shadow: none;
-  overflow: visible;
-  line-height: 30px;
-  padding-right: 10px;
-`;
-
-const StarRed = css`
-  ${StarWhite}
-  color: #ff3333;
-`;
-
-const TodoInfo = css`
+const Container = css`
   display: flex;
-  justify-content: flex-end;
-  height: 30px;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 0.5rem;
 `;
 
-const TodoStatus = css`
-  padding-top: 4px;
-  & select {
-    padding: 2px;
-    margin-left: 10px;
+const Button = css`
+  ${ButtonDefault}
+  font-size: ${FONT_SIZE_STYLE.smaller};
+  background-color: ${COLOR_STYLE.greyLighter};
+  padding: 0.5rem 0.8rem;
+  margin-right: 5px;
+  border-radius: 2px;
+  color: ${COLOR_STYLE.greyDarkest};
+  transition: all 0.3s;
+
+  &:hover {
+    transform: translateY(-2px);
   }
 `;
 
-const DeleteButton = css`
-  margin-left: 10px;
-  cursor: pointer;
+const SelectedButton = css`
+  ${Button}
+  background-color: ${COLOR_STYLE.primary};
+  color: ${COLOR_STYLE.white};
+  transition: all 0.3s;
+`;
+
+const Done = css`
+  color: ${COLOR_STYLE.greyDarker};
+  text-decoration: line-through;
 `;

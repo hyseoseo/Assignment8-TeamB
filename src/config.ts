@@ -2,7 +2,7 @@ export const STORAGE_KEYS = {
   todos: 'todos',
 };
 
-export const dateCountry = 'ko-KR';
+export const dateCountry = 'en-US';
 
 export const dateOptions: Intl.DateTimeFormatOptions = {
   weekday: 'long',

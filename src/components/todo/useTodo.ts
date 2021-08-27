@@ -8,7 +8,7 @@ const initialTodolist: Itodo[] = [];
 const useTodo = () => {
   const [todos, setTodos] = useLocalStorage(STORAGE_KEYS.todos, initialTodolist);
 
-  const changeTodoStatus = (id: number, status: Status | string): void => {
+  const changeTodoStatus = (id: number, status: Status): void => {
     setTodos((prev) =>
       prev.map((todo: Itodo) => {
         return todo.id === id ? { ...todo, updatedAt: new Date(), status: status } : todo;
@@ -46,7 +46,7 @@ const useTodo = () => {
     setTodos((prev) =>
       prev.concat({
         taskName: value,
-        status: Status.notStarted,
+        status: Status.todo,
         id: todos.length,
         createdAt: new Date(),
         updatedAt: new Date(),

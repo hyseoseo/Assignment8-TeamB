@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Itodo, OPTIONS, Status } from 'components/todo/type';
 import { IfilterOption } from './types';
 import { FILTER_OPTION } from 'config';
@@ -40,7 +40,7 @@ const useFilter = (todos: Itodo[]) => {
   };
 
   const handleCheck = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    if (e.target.name == FILTER_OPTION.STATUS) {
+    if (e.target.name === FILTER_OPTION.STATUS) {
       setFilterStatus(e.target.value, e.target.checked);
     } else {
       setFilterImportant(e.target.value, e.target.checked);
@@ -49,13 +49,13 @@ const useFilter = (todos: Itodo[]) => {
   };
 
   const setClickedFalse = () => {
-    if (filterOption.status.length == 0 && filterOption.isImportant.length == 0) {
+    if (filterOption.status.length === 0 && filterOption.isImportant.length === 0) {
       setFilterClicked(false);
     }
   };
 
   const filteredTodos = (filter: string, todos: Itodo[]): Itodo[] => {
-    return filter == FILTER_OPTION.STATUS // or FILTER.IMPORTANT
+    return filter === FILTER_OPTION.STATUS // or FILTER.IMPORTANT
       ? todos.filter((item: Itodo) => filterOption.status.includes(changeIntoStatus(item.status)))
       : todos.filter((item: Itodo) =>
           filterOption.isImportant.includes(item.isImportant.toString()),

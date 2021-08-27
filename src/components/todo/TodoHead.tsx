@@ -1,7 +1,8 @@
 import React from 'react';
 import { css } from '@emotion/react';
+import { BOX_STYLE, COLOR_STYLE } from 'styles';
 import { getCurrentDate } from 'utils';
-import { TodoCreate } from 'components/todo';
+import { TodoCreate, TodoFilter } from 'components/todo';
 
 interface ITodoHeadProps {
   createTodo: (value: string) => void;
@@ -9,10 +10,13 @@ interface ITodoHeadProps {
 }
 
 const TodoHead: React.FC<ITodoHeadProps> = ({ createTodo, sortTodo }) => {
+  const curDate = getCurrentDate();
+
   return (
-    <header css={HeadBlock}>
-      <h1 css={Time}>{getCurrentDate()}</h1>
+    <header css={Header}>
+      <h1>{curDate}</h1>
       <TodoCreate createTodo={createTodo} />
+      <TodoFilter />
       <button onClick={sortTodo}>생성일 순 정렬</button>
     </header>
   );
@@ -20,12 +24,10 @@ const TodoHead: React.FC<ITodoHeadProps> = ({ createTodo, sortTodo }) => {
 
 export default TodoHead;
 
-const HeadBlock = css`
-  text-align: center;
-  padding-top: 30px;
-`;
-
-const Time = css`
-  padding-bottom: 10px;
-  font-size: 1rem;
+const Header = css`
+  width: 100%;
+  background-color: ${COLOR_STYLE.white};
+  padding: 2.5rem 1.75rem;
+  border-radius: 5px;
+  box-shadow: ${BOX_STYLE.shadow};
 `;

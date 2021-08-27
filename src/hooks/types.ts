@@ -19,14 +19,34 @@ export interface IuseDnD {
   handleDragEnd: (setIsDragOver: SetState<boolean>) => void;
 }
 
+export interface ImodalContent {
+  task: string;
+  parentheses: string;
+  lastUpdated: string;
+}
+
+export interface ImodalContents {
+  title: string;
+  content: ImodalContent | string;
+  buttonType: ButtonType;
+  task?: string;
+  taskInfo?: string;
+  onOk?: () => void;
+}
+
 export interface IuseModal {
   isVisible: boolean;
-  ModalComponent: React.FC | null;
-  openModal: (component: React.FC) => void;
+  contents: ImodalContents;
+  openModal: (contents: ImodalContents) => void;
   closeModal: () => void;
 }
 
 export interface IfilterOption {
   status: Status[];
   isImportant: string[];
+}
+
+export enum ButtonType {
+  ok = 'ok',
+  delete = 'delete',
 }

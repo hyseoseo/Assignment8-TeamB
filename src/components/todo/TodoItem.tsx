@@ -3,6 +3,8 @@ import { css } from '@emotion/react';
 import { IoMdRemoveCircleOutline } from 'react-icons/io';
 import { BOX_STYLE, ButtonDefault, COLOR_STYLE, FONT_SIZE_STYLE } from 'styles';
 import { getUpdatedTimeFormat } from 'utils/getUpdatedTimeFormat';
+import { MODAL_OPTION } from 'config';
+import { useModalContext } from 'contexts';
 import { SetState } from 'hooks/types';
 import { Itodo, Status } from './type';
 import { TodoController } from '.';
@@ -32,6 +34,7 @@ const TodoItem: React.FC<Iprop> = ({ ...props }) => {
     changeTodoStatus,
     changeTodoImportance,
   } = props;
+  const { openModal } = useModalContext()!;
   const ListStyle = getListStyle(todo.status);
 
   const [time, setTime] = useState<string>(getUpdatedTimeFormat(todo.updatedAt));
@@ -40,6 +43,18 @@ const TodoItem: React.FC<Iprop> = ({ ...props }) => {
     const timer = setInterval(() => setTime(getUpdatedTimeFormat(todo.updatedAt)), 1000);
     return () => clearInterval(timer);
   }, [todo.updatedAt]);
+
+  const handleRemove = (): void => {
+    openModal({
+      ...MODAL_OPTION.DELETE,
+      content: '',
+      task: todo.taskName,
+      taskInfo: `(${todo.status}${todo.isImportant ? ', Bookmark' : ''}) updated 5 mins ago`,
+      onOk() {
+        handleDeleteTodo(todo.id);
+      },
+    });
+  };
 
   return (
     <li
@@ -51,7 +66,7 @@ const TodoItem: React.FC<Iprop> = ({ ...props }) => {
       onDragEnd={() => handleDragEnd(setIsDragOver)}
     >
       <h2 css={todo.status === Status.done ? Done : Text}>{todo.taskName}</h2>
-      <button css={DeleteButton} onClick={() => handleDeleteTodo(todo.id)}>
+      <button css={DeleteButton} onClick={handleRemove}>
         <IoMdRemoveCircleOutline />
       </button>
       <TodoController
@@ -67,9 +82,14 @@ const TodoItem: React.FC<Iprop> = ({ ...props }) => {
 export default TodoItem;
 
 const getListStyle = (status: Status) => {
-  if (status === Status.todo) return ListTodo;
-  if (status === Status.progress) return ListInProgress;
-  if (status === Status.done) return ListDone;
+  switch (status) {
+    case Status.todo:
+      return ListTodo;
+    case Status.progress:
+      return ListInProgress;
+    case Status.done:
+      return ListDone;
+  }
 };
 
 const List = css`

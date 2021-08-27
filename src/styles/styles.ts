@@ -6,6 +6,11 @@ export const FlexCenter = css`
   align-items: center;
 `;
 
+export const FlexColCenter = css`
+  ${FlexCenter}
+  flex-direction: column;
+`;
+
 export const ButtonDefault = css`
   border: 0;
   background-color: inherit;

@@ -17,7 +17,7 @@ const TodoHead: React.FC<ITodoHeadProps> = ({ createTodo, sortTodo }) => {
       <h1>{curDate}</h1>
       <TodoCreate createTodo={createTodo} />
       <TodoFilter />
-      <button onClick={sortTodo}>생성일 순 정렬</button>
+      <button onClick={sortTodo}>최근 생성일 순</button>
     </header>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { css } from '@emotion/react';
 import { ButtonDefault, COLOR_STYLE, FONT_SIZE_STYLE } from 'styles';
 import { OPTIONS, Itodo, Status } from './type';

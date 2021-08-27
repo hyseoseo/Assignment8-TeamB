@@ -13,7 +13,6 @@ const useModal = (): IuseModal => {
 
   const closeModal = (): void => {
     setIsVisible(false);
-    setContents(BASE_MODAL_OPTION);
   };
 
   return { isVisible, openModal, closeModal, contents };

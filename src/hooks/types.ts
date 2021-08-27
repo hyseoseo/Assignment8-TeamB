@@ -19,10 +19,18 @@ export interface IuseDnD {
   handleDragEnd: (setIsDragOver: SetState<boolean>) => void;
 }
 
+export interface ImodalContent {
+  task: string;
+  parentheses: string;
+  lastUpdated: string;
+}
+
 export interface ImodalContents {
   title: string;
-  content: string;
+  content: ImodalContent | string;
   buttonType: ButtonType;
+  task?: string;
+  taskInfo?: string;
   onOk?: () => void;
 }
 

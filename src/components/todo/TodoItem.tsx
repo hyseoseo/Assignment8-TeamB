@@ -39,6 +39,9 @@ const TodoItem: React.FC<Iprop> = ({ ...props }) => {
   const handleRemove = (): void => {
     openModal({
       ...MODAL_OPTION.DELETE,
+      content: '',
+      task: todo.taskName,
+      taskInfo: `(${todo.status}${todo.isImportant ? ', Bookmark' : ''}) updated 5 mins ago`,
       onOk() {
         handleDeleteTodo(todo.id);
       },

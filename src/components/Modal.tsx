@@ -8,7 +8,7 @@ import { ButtonType } from 'hooks/types';
 
 const Modal: React.FC = () => {
   const { isVisible, closeModal, contents } = useModalContext()!;
-  const { title, content, buttonType, onOk } = contents!;
+  const { title, content, buttonType, onOk, task, taskInfo } = contents!;
   const BtnStyle = getButtonStyle(buttonType);
 
   const handleClick = (): void => {
@@ -29,7 +29,15 @@ const Modal: React.FC = () => {
             </span>
             <div css={ContentsContainer}>
               <h1 css={Heading}>{title}</h1>
-              <p css={Paragraph}>{content}</p>
+              {task ? (
+                <p css={Paragraph}>
+                  "<span css={Task}>{task}</span>"
+                  <br />
+                  <small css={TaskInfo}>{taskInfo}.</small>
+                </p>
+              ) : (
+                <p css={Paragraph}>{content}</p>
+              )}
               <button css={BtnStyle} onClick={handleClick}>
                 <span>{buttonType.toUpperCase()}</span>
               </button>
@@ -95,6 +103,15 @@ const Paragraph = css`
   font-size: ${FONT_SIZE_STYLE.medium};
 `;
 
+const Task = css`
+  color: ${COLOR_STYLE.primary};
+`;
+
+const TaskInfo = css`
+  color: ${COLOR_STYLE.greyDarkest};
+  font-size: ${FONT_SIZE_STYLE.small};
+`;
+
 const Icon = css`
   transform: translateY(-25%);
   margin-right: 0.5rem;
@@ -112,7 +129,7 @@ const Btn = css`
   position: absolute;
   bottom: 0;
   right: 0;
-  transform: translate(-50%, -50%);
+  transform: translate(-25%, -50%);
   transition: all 0.2s;
 
   span {
@@ -136,6 +153,10 @@ const BtnDelete = css`
   ${Btn}
   background-color: ${COLOR_STYLE.red};
   padding: 0.5rem 1.2rem;
+
+  span {
+    font-size: ${FONT_SIZE_STYLE.small};
+  }
 
   &:hover {
     transform: translate(-50%, -55%);

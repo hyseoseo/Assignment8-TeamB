@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MainBtn, MainSelectedBtn } from 'styles';
 import { FilterType, OPTIONS, Status } from 'components/todo/type';
 
@@ -21,6 +21,11 @@ const TodoFilter: React.FC<Iprop> = ({ filterList }) => {
     filterList(FilterType.none);
     setCurrentFilter(FilterType.none);
   };
+
+  useEffect(() => {
+    clearFilter();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>
@@ -46,7 +51,7 @@ const TodoFilter: React.FC<Iprop> = ({ filterList }) => {
         css={currentFilter === FilterType.none ? MainSelectedBtn : MainBtn}
         onClick={clearFilter}
       >
-        <span>Clear</span>
+        <span>None</span>
       </button>
     </div>
   );

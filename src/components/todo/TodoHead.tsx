@@ -18,6 +18,7 @@ const TodoHead: React.FC<ITodoHeadProps> = ({ createTodo, sortTodo, filterList }
     <header css={Header}>
       <h1 css={DateStyle}>{curDate}</h1>
       <TodoCreate createTodo={createTodo} />
+      <h2 css={HeadingFilter}>Filter by tags</h2>
       <div css={BtnsContainer}>
         <TodoFilter filterList={filterList} />
         <button css={SortBtn} onClick={sortTodo}>
@@ -43,6 +44,12 @@ const DateStyle = css`
   font-size: ${FONT_SIZE_STYLE.medium};
   color: ${COLOR_STYLE.greyDarkest};
   margin-bottom: 1.25rem;
+`;
+
+const HeadingFilter = css`
+  color: ${COLOR_STYLE.greyDarkest};
+  font-size: ${FONT_SIZE_STYLE.mediumSmall};
+  margin-bottom: 0.5rem;
 `;
 
 const BtnsContainer = css`

@@ -4,6 +4,12 @@ export enum Status {
   done = 'Done',
 }
 
+export enum FilterType {
+  bookmark,
+  status,
+  none,
+}
+
 export interface Itodo {
   id: number;
   taskName: string;
@@ -11,6 +17,7 @@ export interface Itodo {
   createdAt: Date;
   updatedAt: Date;
   isImportant: boolean;
+  isVisible: boolean;
 }
 
 export const OPTIONS = [Status.todo, Status.progress, Status.done];

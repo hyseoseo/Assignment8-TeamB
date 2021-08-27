@@ -1,7 +1,7 @@
 import { STORAGE_KEYS } from 'config';
 import { useLocalStorage } from 'hooks';
 import { sortDate } from 'utils';
-import { Status, Itodo } from './type';
+import { Status, Itodo, FilterType } from './type';
 
 const initialTodolist: Itodo[] = [];
 
@@ -51,6 +51,7 @@ const useTodo = () => {
         createdAt: new Date(),
         updatedAt: new Date(),
         isImportant: false,
+        isVisible: true,
       }),
     );
   };
@@ -66,6 +67,42 @@ const useTodo = () => {
     updateTodoId();
   };
 
+  const filterList = (filterType: FilterType, status?: Status): void => {
+    switch (filterType) {
+      case FilterType.bookmark:
+        filterByBookmark();
+        break;
+      case FilterType.status:
+        filterByStatus(status!);
+        break;
+      case FilterType.none:
+        clearFilter();
+        break;
+      default:
+        throw new Error('Filter type does not match. Please check your filter list & type.');
+    }
+  };
+
+  const filterByBookmark = (): void => {
+    setTodos((prev) =>
+      prev.map((todo: Itodo) =>
+        todo.isImportant ? { ...todo, isVisible: true } : { ...todo, isVisible: false },
+      ),
+    );
+  };
+
+  const filterByStatus = (status: Status): void => {
+    setTodos((prev) =>
+      prev.map((todo: Itodo) =>
+        todo.status === status ? { ...todo, isVisible: true } : { ...todo, isVisible: false },
+      ),
+    );
+  };
+
+  const clearFilter = (): void => {
+    setTodos((prev) => prev.map((todo: Itodo) => ({ ...todo, isVisible: true })));
+  };
+
   return {
     todos,
     setTodos,
@@ -74,6 +111,7 @@ const useTodo = () => {
     handleDeleteTodo,
     changeTodoImportance,
     sortTodo,
+    filterList,
   };
 };
 

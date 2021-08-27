@@ -51,7 +51,7 @@ const useTodo = () => {
       createdAt: new Date(),
       updatedAt: new Date(),
       isImportant: false,
-      isVisible: false,
+      isVisible: true,
     });
     setTodos(newTodos);
   };

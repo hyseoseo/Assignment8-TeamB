@@ -46,7 +46,7 @@ const useTodo = () => {
     setTodos((prev) =>
       prev.concat({
         taskName: value,
-        status: Status.notStarted,
+        status: Status.todo,
         id: todos.length,
         createdAt: new Date(),
         updatedAt: new Date(),

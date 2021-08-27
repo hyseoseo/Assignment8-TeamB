@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { css } from '@emotion/react';
+import { IoMdRemoveCircleOutline } from 'react-icons/io';
+import { BOX_STYLE, ButtonDefault, COLOR_STYLE, FONT_SIZE_STYLE } from 'styles';
+import { SetState } from 'hooks/types';
 import { Itodo, Status } from './type';
 import { TodoController } from '.';
-import { SetState } from 'hooks/types';
 
 interface Iprop {
   todo: Itodo;
@@ -12,7 +14,7 @@ interface Iprop {
   handleDragOver: (e: React.DragEvent, setIsDragOver: SetState<boolean>) => void;
   handleDragEnd: (setIsDragOver: SetState<boolean>) => void;
   handleDeleteTodo: (id: number) => void;
-  changeTodoStatus: (id: number, status: Status | string) => void;
+  changeTodoStatus: (id: number, status: Status) => void;
   changeTodoImportance: (id: number) => void;
 }
 
@@ -29,20 +31,23 @@ const TodoItem: React.FC<Iprop> = ({ ...props }) => {
     changeTodoStatus,
     changeTodoImportance,
   } = props;
+  const ListStyle = getListStyle(todo.status);
 
   return (
     <li
-      css={isDragOver ? ListHover : List}
+      css={isDragOver ? ListHover : ListStyle}
       draggable
       onDragStart={() => handleDragStart(index)}
       onDragEnter={() => handleDragEnter(index)}
       onDragOver={(e) => handleDragOver(e, setIsDragOver)}
       onDragEnd={() => handleDragEnd(setIsDragOver)}
     >
-      <p css={Content}>{todo.taskName}</p>
+      <h2 css={todo.status === Status.done ? Done : Text}>{todo.taskName}</h2>
+      <button css={DeleteButton} onClick={() => handleDeleteTodo(todo.id)}>
+        <IoMdRemoveCircleOutline />
+      </button>
       <TodoController
         todo={todo}
-        handleDeleteTodo={handleDeleteTodo}
         changeTodoStatus={changeTodoStatus}
         changeTodoImportance={changeTodoImportance}
       />
@@ -52,21 +57,81 @@ const TodoItem: React.FC<Iprop> = ({ ...props }) => {
 
 export default TodoItem;
 
+const getListStyle = (status: Status) => {
+  if (status === Status.todo) return ListTodo;
+  if (status === Status.progress) return ListInProgress;
+  if (status === Status.done) return ListDone;
+};
+
 const List = css`
-  width: 95%;
-  margin: 0 auto;
-  background: #eeeeee;
-  padding: 10px 17px;
-  border-radius: 10px;
-  margin-top: 10px;
+  position: relative;
+  background: ${COLOR_STYLE.white};
+  padding: 1rem 1.6rem;
+  border-left: 4px solid ${COLOR_STYLE.grey};
+  border-radius: 3px;
+  box-shadow: ${BOX_STYLE.shadow};
+  margin-bottom: 1rem;
+  transition: all 0.2s;
   cursor: move;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+
+  &:first-of-type {
+    margin-top: 3px;
+  }
 `;
 
 const ListHover = css`
   ${List}
-  background-color: #666;
+  background-color: ${COLOR_STYLE.grey};
 `;
 
-const Content = css`
+const ListTodo = css`
+  ${List}
+  border-left: 4px solid ${COLOR_STYLE.primary};
+`;
+
+const ListInProgress = css`
+  ${List}
+  border-left: 4px solid ${COLOR_STYLE.blue};
+`;
+
+const ListDone = css`
+  ${List}
+  border-left: 4px solid ${COLOR_STYLE.green};
+`;
+
+const Text = css`
+  font-size: ${FONT_SIZE_STYLE.medium};
   padding: 10px 0;
+`;
+
+const Done = css`
+  ${Text}
+  color: ${COLOR_STYLE.grey};
+  text-decoration: line-through;
+`;
+
+const DeleteButton = css`
+  ${ButtonDefault}
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  transform: translate(-25%, 15%);
+
+  svg {
+    color: ${COLOR_STYLE.primary};
+    font-size: ${FONT_SIZE_STYLE.larger};
+    transition: all 0.3s;
+  }
+
+  &:hover {
+    svg {
+      color: ${COLOR_STYLE.red};
+      transform: rotate(-90deg);
+    }
+  }
 `;

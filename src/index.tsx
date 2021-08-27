@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Global } from '@emotion/react';
-import { GlobalStyles } from 'style/GlobalStyles';
+import { GlobalStyles } from 'styles';
 import App from './App';
 
 ReactDOM.render(
@@ -9,5 +9,5 @@ ReactDOM.render(
     <Global styles={GlobalStyles} />
     <App />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

@@ -7,4 +7,6 @@ export const COLOR_STYLE = {
   greyDarkest: '#444',
   white: '#FBFBFB',
   red: '#e91e63',
+  blue: '#1e84eb',
+  green: '#5cb484',
 };

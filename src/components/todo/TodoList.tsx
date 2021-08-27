@@ -8,7 +8,7 @@ interface ITodoListProps {
   todos: Itodo[];
   setTodos: React.Dispatch<React.SetStateAction<Itodo[]>>;
   handleDeleteTodo: (id: number) => void;
-  changeTodoStatus: (id: number, status: Status | string) => void;
+  changeTodoStatus: (id: number, status: Status) => void;
   changeTodoImportance: (id: number) => void;
 }
 
@@ -47,6 +47,5 @@ const TodoList: React.FC<ITodoListProps> = ({
 export default TodoList;
 
 const Container = css`
-  padding: 10px 0 30px 0;
-  overflow-y: auto;
+  overflow-y: scroll;
 `;

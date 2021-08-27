@@ -15,7 +15,6 @@ const TodoController: React.FC<Iprop> = ({ todo, changeTodoStatus, changeTodoImp
   const handleClick = (status: Status): void => {
     setStatus(status);
     changeTodoStatus(todo.id, status);
-    console.log(status);
   };
 
   return (
@@ -24,7 +23,7 @@ const TodoController: React.FC<Iprop> = ({ todo, changeTodoStatus, changeTodoImp
         css={todo.isImportant ? SelectedButton : Button}
         onClick={() => changeTodoImportance(todo.id)}
       >
-        <span>Bookmark</span>
+        <span css={status === 'Done' && Done}>Bookmark</span>
       </button>
       {OPTIONS.map((option, index) => (
         <button
@@ -33,7 +32,7 @@ const TodoController: React.FC<Iprop> = ({ todo, changeTodoStatus, changeTodoImp
           css={option === status ? SelectedButton : Button}
           onClick={() => handleClick(option)}
         >
-          <span>{option}</span>
+          <span css={status === 'Done' && Done}>{option}</span>
         </button>
       ))}
     </div>
@@ -58,6 +57,10 @@ const Button = css`
   border-radius: 2px;
   color: ${COLOR_STYLE.greyDarkest};
   transition: all 0.3s;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
 `;
 
 const SelectedButton = css`
@@ -65,4 +68,9 @@ const SelectedButton = css`
   background-color: ${COLOR_STYLE.primary};
   color: ${COLOR_STYLE.white};
   transition: all 0.3s;
+`;
+
+const Done = css`
+  color: ${COLOR_STYLE.greyDarker};
+  text-decoration: line-through;
 `;

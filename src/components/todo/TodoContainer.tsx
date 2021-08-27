@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { TodoList, TodoHead, useTodo } from 'components/todo';
+import { COLOR_STYLE } from 'styles';
+import { TodoList, TodoHead, TodoBoundary, useTodo } from 'components/todo';
 
 const TodoContainer: React.FC = () => {
   const {
@@ -13,11 +14,10 @@ const TodoContainer: React.FC = () => {
     sortTodo,
   } = useTodo();
 
-  console.log(todos);
-
   return (
-    <div css={TodoTemplate}>
+    <div css={Container}>
       <TodoHead createTodo={createTodo} sortTodo={sortTodo} />
+      <TodoBoundary />
       <TodoList
         todos={todos}
         setTodos={setTodos}
@@ -31,22 +31,36 @@ const TodoContainer: React.FC = () => {
 
 export default TodoContainer;
 
-const TodoTemplate = css`
-  width: 70%;
-  height: 800px;
-
-  min-width: 360px;
-  max-width: 700px;
-
-  background: white;
-  border-radius: 30px;
-  box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.1);
-
+const Container = css`
+  width: 50%;
+  height: 90vh;
   margin: 0 auto;
-
-  margin-top: 40px;
-  margin-bottom: 40px;
-
   display: flex;
   flex-direction: column;
+
+  /* &::before {
+    content: '';
+    width: 70rem;
+    height: 70rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -10;
+    background-color: ${COLOR_STYLE.primaryLighter};
+    border-radius: 100%;
+    transform: translate(-50%, -50%);
+  }
+
+  &::after {
+    content: '';
+    width: 25rem;
+    height: 25rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: -10;
+    background-color: ${COLOR_STYLE.primaryLighter};
+    border-radius: 100%;
+    transform: translateX(-15%);
+  } */
 `;

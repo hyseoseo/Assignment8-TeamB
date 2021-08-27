@@ -40,8 +40,10 @@ $ npm start
   - ㄱ
   - ㄴ
 - [장명진](https://github.com/thinkJin6)
-  - ㄷ
-  - ㄹ
+  - custom hooks 구현 - Drag & Drop, Modal, Local Storage, Input
+  - Portal, context and Modal 렌더링
+  - layout & style 및 기능에 따른 반응형 스타일링
+  - Filter by 상태 & 북마크
 
 ## 적용기술
 

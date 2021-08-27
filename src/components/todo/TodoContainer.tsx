@@ -15,7 +15,6 @@ const TodoContainer: React.FC = () => {
     handleDeleteTodo,
     changeTodoImportance,
     sortTodo,
-    changeVisibility,
   } = useTodo();
   const { filteredItem, filterOption, filterClicked, handleCheck, setFilteredResult } =
     useFilter(todos);
@@ -34,26 +33,10 @@ const TodoContainer: React.FC = () => {
     const status = e.target.name;
     const isChecked = e.target.checked;
     setCheckedStatus((prev) => ({ ...prev, [status]: isChecked }));
+  };
 
-    let array = [];
-    for (const [key, value] of Object.entries(checkedStatus)) {
-      array.push([key, value]);
-    }
-    const checkedStatusToArray = array.flatMap((e) => (e[1] === true ? [e[0]] : []));
-    todos.map((todo) => {
-      if (checkedStatusToArray.length === 0) {
-        return { ...todo, visible: true };
-      } else if (checkedStatusToArray.length && checkedStatusToArray.includes(todo.status)) {
-        return { ...todo, visible: true };
-      } else {
-        return { ...todo, visible: false };
-      }
-    });
-    /*
-    const importanceFilteredTodos = onlyImportant
-      ? statusFilteredTodos.filter((todo) => todo.isImportant)
-      : statusFilteredTodos;
-  */
+  const handleImportanceCheckbox = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setOnlyImportant(e.target.checked);
   };
 
   useEffect(() => {
@@ -62,9 +45,6 @@ const TodoContainer: React.FC = () => {
       array.push([key, value]);
     }
     const checkedStatusToArray = array.flatMap((e) => (e[1] === true ? [e[0]] : []));
-    console.log(checkedStatusToArray);
-    const newTodos = [...todos];
-    console.log(newTodos);
     setTodos((prev) =>
       prev.map((todo) => {
         if (checkedStatusToArray.length === 0) {
@@ -81,24 +61,6 @@ const TodoContainer: React.FC = () => {
     );
   }, [checkedStatus]);
 
-  const handleImportanceCheckbox = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setOnlyImportant(e.target.checked);
-  };
-  /*
-  useEffect(() => {
-    let array = [];
-    for (const [key, value] of Object.entries(checkedStatus)) {
-      array.push([key, value]);
-    }
-    const checkedStatusToArray = array.flatMap((e) => (e[1] === true ? [e[0]] : []));
-    //console.log(checkedStatusToArray);
-    if (checkedStatusToArray) {
-      setTodos((prev) =>
-        prev.map((todo) => ({ ...todo, visible: isChecked})),
-      );
-    }
-  }, [checkedStatus]);
-*/
   return (
     <div css={TodoTemplate}>
       <TodoHead createTodo={createTodo} sortTodo={sortTodo} />

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 import { IoMdRemoveCircleOutline } from 'react-icons/io';
 import { BOX_STYLE, ButtonDefault, COLOR_STYLE, FONT_SIZE_STYLE } from 'styles';
+import { getUpdatedTimeFormat } from 'utils/getUpdatedTimeFormat';
 import { SetState } from 'hooks/types';
 import { Itodo, Status } from './type';
 import { TodoController } from '.';
@@ -33,6 +34,13 @@ const TodoItem: React.FC<Iprop> = ({ ...props }) => {
   } = props;
   const ListStyle = getListStyle(todo.status);
 
+  const [time, setTime] = useState<string>(getUpdatedTimeFormat(todo.updatedAt));
+
+  useEffect(() => {
+    const timer = setInterval(() => setTime(getUpdatedTimeFormat(todo.updatedAt)), 1000);
+    return () => clearInterval(timer);
+  }, [todo.updatedAt]);
+
   return (
     <li
       css={isDragOver ? ListHover : ListStyle}
@@ -51,6 +59,7 @@ const TodoItem: React.FC<Iprop> = ({ ...props }) => {
         changeTodoStatus={changeTodoStatus}
         changeTodoImportance={changeTodoImportance}
       />
+      <p>updated {time} ago</p>
     </li>
   );
 };

@@ -9,4 +9,5 @@ export const COLOR_STYLE = {
   red: '#e91e63',
   blue: '#1e84eb',
   green: '#5cb484',
+  yellow: '#ffcc00',
 };

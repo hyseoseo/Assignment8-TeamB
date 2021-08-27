@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { css } from '@emotion/react';
 import { FaPlus } from 'react-icons/fa';
 import { ButtonDefault, COLOR_STYLE, FONT_SIZE_STYLE } from 'styles';
+import { MODAL_OPTION } from 'config';
 import { useModalContext } from 'contexts';
 import { useInput } from 'hooks';
-import { ErrorModal } from 'components/modals';
 
 interface ITodoCreateProps {
   createTodo: (value: string) => void;
@@ -13,13 +13,14 @@ interface ITodoCreateProps {
 const TodoCreate: React.FC<ITodoCreateProps> = ({ createTodo }) => {
   const [isError, setIsError] = useState(false);
   const { value, clearValue, handleChange } = useInput('');
-  const { openModal } = useModalContext()!;
+  const { isVisible, openModal } = useModalContext()!;
+  const inputRef = useRef<null | HTMLInputElement>(null);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
     if (value === '') {
-      openModal(ErrorModal);
+      openModal(MODAL_OPTION.ERROR);
       setIsError(true);
       return;
     }
@@ -32,9 +33,14 @@ const TodoCreate: React.FC<ITodoCreateProps> = ({ createTodo }) => {
     setIsError(false);
   }, [value]);
 
+  useEffect(() => {
+    inputRef.current!.focus();
+  }, [isVisible]);
+
   return (
     <form css={Form} onSubmit={handleSubmit}>
       <input
+        ref={inputRef}
         value={value}
         onChange={handleChange}
         css={isError ? InputError : Input}

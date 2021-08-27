@@ -4,7 +4,7 @@ export const FONT_SIZE_STYLE = {
   medium: '1rem',
   large: '1.25rem',
   larger: '1.375rem',
-  largest: '1.625rem',
+  largest: '1.8rem',
   huge: '3rem',
   gigantic: '3.75rem',
 };

@@ -1,21 +1,22 @@
-import React, { useState } from 'react';
-import { IuseModal } from './types';
+import { useState } from 'react';
+import { BASE_MODAL_OPTION } from 'config';
+import { IuseModal, ImodalContents } from './types';
 
 const useModal = (): IuseModal => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
-  const [ModalComponent, setModalComponent] = useState<React.FC | null>(null);
+  const [contents, setContents] = useState<ImodalContents>(BASE_MODAL_OPTION);
 
-  const openModal = (component: React.FC): void => {
+  const openModal = (contents: ImodalContents): void => {
     setIsVisible(true);
-    setModalComponent(component);
+    setContents(contents);
   };
 
   const closeModal = (): void => {
     setIsVisible(false);
-    setModalComponent(null);
+    setContents(BASE_MODAL_OPTION);
   };
 
-  return { isVisible, openModal, closeModal, ModalComponent };
+  return { isVisible, openModal, closeModal, contents };
 };
 
 export default useModal;

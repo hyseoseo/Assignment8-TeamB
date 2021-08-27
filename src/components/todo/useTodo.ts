@@ -43,6 +43,17 @@ const useTodo = () => {
   };
 
   const createTodo = (value: string): void => {
+    const newTodos = [...todos];
+    newTodos.unshift({
+      taskName: value,
+      status: Status.todo,
+      id: todos.length,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      isImportant: false,
+    });
+    setTodos(newTodos);
+    /*
     setTodos((prev) =>
       prev.concat({
         taskName: value,
@@ -53,13 +64,14 @@ const useTodo = () => {
         isImportant: false,
       }),
     );
+    */
   };
 
   const sortTodo = (): void => {
     setTodos((prev) =>
       prev.sort((a: Itodo, b: Itodo) => {
-        if (sortDate(a.createdAt, b.createdAt) < 0) return -1;
-        if (sortDate(a.createdAt, b.createdAt) > 0) return 1;
+        if (sortDate(a.createdAt, b.createdAt) < 0) return 1;
+        if (sortDate(a.createdAt, b.createdAt) > 0) return -1;
         return 0;
       }),
     );

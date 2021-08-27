@@ -40,9 +40,8 @@ const TodoItem: React.FC<Iprop> = ({ ...props }) => {
   const [time, setTime] = useState<string>(getUpdatedTimeFormat(todo.updatedAt));
 
   useEffect(() => {
-    const timer = setInterval(() => setTime(getUpdatedTimeFormat(todo.updatedAt)), 1000);
-    return () => clearInterval(timer);
-  }, [todo.updatedAt]);
+    setTime(getUpdatedTimeFormat(todo.updatedAt));
+  }, [todo]);
 
   const handleRemove = (): void => {
     openModal({

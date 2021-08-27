@@ -1,46 +1,49 @@
-# Getting Started with Create React App
+# ModuCompany Todo-List-App 과제
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 데모 링크
+https://confident-bassi-6ef343.netlify.app
 
-## Available Scripts
+## 실행 방법
+패키지 매니저 npm 사용
 
-In the project directory, you can run:
+```
+# install 
+$ npm install
 
-### `npm start`
+# serve with hot reload at localhost:3000
+$ npm start
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 필수 구현 사항
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- 헤더 상단 고정
+- Todo Task 추가, 조회, 상태/중요도 변경, 삭제
+- Todo Task Drag & Drop
+- Todo Task 필터링 (기준: 상태, 중요도)
 
-### `npm test`
+## 추가 구현 사항
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 현재 날짜 및 요일 출력
+- 미완료 Todo Task 개수 표시
+- Todo Task 최신 순 정렬
+- Todo Task Drag & Drop 순서 저장
+- Todo Task 별 updated Time 표시
+- Modal 사용: Error 및 Delete Modal
+- emotion, react-icons 를 활용한 스타일링
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 개발 인원별 구현 리스트
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [이가은](https://github.com/salybu)
+  - 최초 Layout 및 최초 Filter 기능
+- [서희영](https://github.com/hyseoseo)
+  - ㄱ
+  - ㄴ
+- [장명진](https://github.com/thinkJin6)
+  - ㄷ
+  - ㄹ
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 적용기술
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+React, Hook, emotion, react-icons
+  

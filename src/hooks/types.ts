@@ -1,3 +1,4 @@
+import { Status } from 'components/todo/type';
 import React from 'react';
 
 export type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
@@ -23,4 +24,9 @@ export interface IuseModal {
   ModalComponent: React.FC | null;
   openModal: (component: React.FC) => void;
   closeModal: () => void;
+}
+
+export interface IfilterOption {
+  status: Status[];
+  isImportant: string[];
 }

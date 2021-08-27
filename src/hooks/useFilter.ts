@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import { Itodo, OPTIONS, Status } from 'components/todo/type';
+import { IfilterOption } from './types';
 import { FILTER_OPTION } from 'config';
-
-interface IfilterOption {
-  status: Status[];
-  isImportant: string[];
-}
 
 const InitialFilterOption: IfilterOption = {
   status: [],
@@ -15,6 +11,7 @@ const InitialFilterOption: IfilterOption = {
 const useFilter = (todos: Itodo[]) => {
   const [filteredItem, setFilteredItem] = useState<Itodo[]>([]);
   const [filterOption, setFilterOption] = useState<IfilterOption>(InitialFilterOption);
+  const [filterClicked, setFilterClicked] = useState<boolean>(false);
 
   const changeIntoStatus = (value: string): Status => {
     const status: Status = OPTIONS.find((option) => option === value)!;
@@ -43,22 +40,29 @@ const useFilter = (todos: Itodo[]) => {
   };
 
   const handleCheck = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    if (e.target.name == FILTER_OPTION.STATUS) {
+    if (e.target.name === FILTER_OPTION.STATUS) {
       setFilterStatus(e.target.value, e.target.checked);
     } else {
       setFilterImportant(e.target.value, e.target.checked);
     }
+    setClickedFalse();
+  };
+
+  const setClickedFalse = () => {
+    if (filterOption.status.length === 0 && filterOption.isImportant.length === 0) {
+      setFilterClicked(false);
+    }
   };
 
   const filteredTodos = (filter: string, todos: Itodo[]): Itodo[] => {
-    return filter == FILTER_OPTION.STATUS // or FILTER.IMPORTANT
+    return filter === FILTER_OPTION.STATUS // or FILTER.IMPORTANT
       ? todos.filter((item: Itodo) => filterOption.status.includes(changeIntoStatus(item.status)))
       : todos.filter((item: Itodo) =>
           filterOption.isImportant.includes(item.isImportant.toString()),
         );
   };
 
-  const handleSubmit = () => {
+  const setFilteredResult = () => {
     let filteredTodo: Itodo[] = [];
     if (!filterOption.isImportant.length) {
       filteredTodo = filteredTodos(FILTER_OPTION.STATUS, todos);
@@ -70,9 +74,17 @@ const useFilter = (todos: Itodo[]) => {
         .filter((item: Itodo) => filterOption.isImportant.includes(item.isImportant.toString()));
     }
     setFilteredItem(filteredTodo);
+    setFilterClicked(true);
   };
 
-  return { handleCheck, handleSubmit };
+  return {
+    filteredItem,
+    filterOption,
+    filterClicked,
+    setFilteredItem,
+    handleCheck,
+    setFilteredResult,
+  };
 };
 
 export default useFilter;

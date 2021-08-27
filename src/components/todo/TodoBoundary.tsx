@@ -2,11 +2,15 @@ import React from 'react';
 import { css } from '@emotion/react';
 import { COLOR_STYLE, FlexCenter, FONT_SIZE_STYLE } from 'styles';
 
-const TodoBoundary: React.FC = () => {
+interface Iprop {
+  undoneTasks: number;
+}
+
+const TodoBoundary: React.FC<Iprop> = ({ undoneTasks }) => {
   return (
     <div css={Wrapper}>
       <span css={TextContainer}>
-        <p css={Text}>5 tasks left to do</p>
+        <p css={Text}>{undoneTasks} tasks left to do</p>
       </span>
     </div>
   );

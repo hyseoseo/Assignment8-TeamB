@@ -1,20 +1,24 @@
 import React from 'react';
-import useFilter from 'hooks/useFilter';
-import { Itodo, OPTIONS } from 'components/todo/type';
+import { css } from '@emotion/react';
+import { OPTIONS } from 'components/todo/type';
 import { FILTER_OPTION } from 'config';
 
-interface filterProps {
-  todos: Itodo[];
+export interface IfilterProps {
+  handleCheck: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setFilteredResult: () => void;
 }
 
-const Filter: React.FC<filterProps> = ({ todos }) => {
-  const { handleCheck, handleSubmit } = useFilter(todos);
+const Filter: React.FC<IfilterProps> = ({ handleCheck, setFilteredResult }) => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setFilteredResult();
+  };
 
   return (
     <form onSubmit={handleSubmit}>
-      <fieldset>
-        {OPTIONS.map((option) => (
-          <label>
+      <fieldset css={fieldset}>
+        {OPTIONS.map((option, index) => (
+          <label key={index}>
             <input
               type="checkbox"
               name={FILTER_OPTION.STATUS}
@@ -25,9 +29,9 @@ const Filter: React.FC<filterProps> = ({ todos }) => {
           </label>
         ))}
       </fieldset>
-      <fieldset>
-        {FILTER_ARRAY_ISIMPORTANT.map((item) => (
-          <label>
+      <fieldset css={fieldset}>
+        {FILTER_ARRAY_ISIMPORTANT.map((item, index) => (
+          <label key={index}>
             <input
               type="checkbox"
               name={FILTER_OPTION.IMPORTANT}
@@ -38,12 +42,17 @@ const Filter: React.FC<filterProps> = ({ todos }) => {
           </label>
         ))}
       </fieldset>
-      <button type="submit">필터</button>
+      <button>필터</button>
     </form>
   );
 };
 
 export default Filter;
+
+const fieldset = css`
+  display: inline-block;
+  margin-right: 10px;
+`;
 
 const FILTER_ARRAY_ISIMPORTANT = [
   {

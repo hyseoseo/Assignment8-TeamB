@@ -1,7 +1,10 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import { COLOR_STYLE } from 'styles';
+import { Status } from './type';
 import { TodoList, TodoHead, TodoBoundary, useTodo } from 'components/todo';
+import useFilter from 'hooks/useFilter';
+import Filter from './Filter';
 
 const TodoContainer: React.FC = () => {
   const {
@@ -14,12 +17,20 @@ const TodoContainer: React.FC = () => {
     sortTodo,
   } = useTodo();
 
+  const undoneTodos: number = todos.filter((todo) => todo.status !== Status.done).length;
+  const { filteredItem, filterOption, filterClicked, handleCheck, setFilteredResult } =
+    useFilter(todos);
+
   return (
     <div css={Container}>
       <TodoHead createTodo={createTodo} sortTodo={sortTodo} />
-      <TodoBoundary />
+      <TodoBoundary undoneTasks={undoneTodos} />
+      <Filter handleCheck={handleCheck} setFilteredResult={setFilteredResult} />
       <TodoList
         todos={todos}
+        filteredItem={filteredItem}
+        filterOption={filterOption}
+        filterClicked={filterClicked}
         setTodos={setTodos}
         handleDeleteTodo={handleDeleteTodo}
         changeTodoStatus={changeTodoStatus}

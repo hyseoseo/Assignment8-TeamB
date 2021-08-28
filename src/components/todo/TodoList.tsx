@@ -4,21 +4,16 @@ import { useDnD } from 'hooks';
 import { Itodo, Status } from './type';
 import { TodoItem } from 'components/todo';
 
-interface ITodoListProps {
+interface IProps {
   todos: Itodo[];
   setTodos: React.Dispatch<React.SetStateAction<Itodo[]>>;
   handleDeleteTodo: (id: number) => void;
   changeTodoStatus: (id: number, status: Status) => void;
-  changeTodoImportance: (id: number) => void;
+  toggleBookmark: (id: number) => void;
 }
 
-const TodoList: React.FC<ITodoListProps> = ({
-  todos,
-  setTodos,
-  handleDeleteTodo,
-  changeTodoStatus,
-  changeTodoImportance,
-}) => {
+const TodoList: React.FC<IProps> = ({ ...props }) => {
+  const { todos, setTodos, handleDeleteTodo, changeTodoStatus, toggleBookmark } = props;
   const { handleDragStart, handleDragEnter, handleDragOver, handleDragEnd } = useDnD(
     todos,
     setTodos,
@@ -39,7 +34,7 @@ const TodoList: React.FC<ITodoListProps> = ({
               handleDragEnd={handleDragEnd}
               handleDeleteTodo={handleDeleteTodo}
               changeTodoStatus={changeTodoStatus}
-              changeTodoImportance={changeTodoImportance}
+              toggleBookmark={toggleBookmark}
             />
           ),
       )}

@@ -1,12 +1,15 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import { COLOR_STYLE, FlexCenter, FONT_SIZE_STYLE } from 'styles';
+import { Status, Itodo } from './type';
 
 interface Iprop {
-  undoneTasks: number;
+  todos: Itodo[];
 }
 
-const TodoBoundary: React.FC<Iprop> = ({ undoneTasks }) => {
+const TodoBoundary: React.FC<Iprop> = ({ todos }) => {
+  const undoneTasks: number = todos.filter((todo) => todo.status !== Status.done).length;
+
   return (
     <div css={Wrapper}>
       <span css={TextContainer}>

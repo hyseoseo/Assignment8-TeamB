@@ -1,6 +1,5 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { Status } from './type';
 import { TodoList, TodoHead, TodoBoundary, useTodo } from 'components/todo';
 
 const TodoContainer: React.FC = () => {
@@ -10,23 +9,21 @@ const TodoContainer: React.FC = () => {
     changeTodoStatus,
     createTodo,
     handleDeleteTodo,
-    changeTodoImportance,
+    toggleBookmark,
     sortTodo,
     filterList,
   } = useTodo();
 
-  const undoneTodos: number = todos.filter((todo) => todo.status !== Status.done).length;
-
   return (
     <div css={Container}>
       <TodoHead createTodo={createTodo} sortTodo={sortTodo} filterList={filterList} />
-      <TodoBoundary undoneTasks={undoneTodos} />
+      <TodoBoundary todos={todos} />
       <TodoList
         todos={todos}
         setTodos={setTodos}
         handleDeleteTodo={handleDeleteTodo}
         changeTodoStatus={changeTodoStatus}
-        changeTodoImportance={changeTodoImportance}
+        toggleBookmark={toggleBookmark}
       />
     </div>
   );

@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { Status } from 'components/todo/type';
 import { ChangeEvent, IuseInput } from './types';
 
-const useInput = (initialValue: string | Status): IuseInput => {
-  const [value, setValue] = useState<string | Status>(initialValue);
+const useInput = (initialValue: string): IuseInput => {
+  const [value, setValue] = useState<string>(initialValue);
 
   const handleChange = (e: ChangeEvent): void => {
-    const value: string | Status = e.target.value;
+    const value: string = e.target.value;
     setValue(value);
   };
 

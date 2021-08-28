@@ -11,10 +11,18 @@ interface ITodoCreateProps {
 }
 
 const TodoCreate: React.FC<ITodoCreateProps> = ({ createTodo }) => {
-  const [isError, setIsError] = useState(false);
+  const [isError, setIsError] = useState<boolean>(false);
   const { value, clearValue, handleChange } = useInput('');
   const { isVisible, openModal } = useModalContext()!;
-  const inputRef = useRef<null | HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setIsError(false);
+  }, [value]);
+
+  useEffect(() => {
+    inputRef.current!.focus();
+  }, [isVisible]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -28,14 +36,6 @@ const TodoCreate: React.FC<ITodoCreateProps> = ({ createTodo }) => {
     createTodo(value);
     clearValue();
   };
-
-  useEffect(() => {
-    setIsError(false);
-  }, [value]);
-
-  useEffect(() => {
-    inputRef.current!.focus();
-  }, [isVisible]);
 
   return (
     <form css={Form} onSubmit={handleSubmit}>

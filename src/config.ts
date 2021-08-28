@@ -18,15 +18,6 @@ export const FILTER_OPTION = {
   IMPORTANT: 'important',
 };
 
-export const TO_MILISECONDS = {
-  second: 1000,
-  minute: 60 * 1000,
-  hour: 60 * 60 * 1000,
-  day: 24 * 60 * 60 * 1000,
-  month: 30 * 24 * 60 * 60 * 1000,
-  year: 365 * 24 * 60 * 60 * 1000,
-};
-
 export const BASE_MODAL_OPTION = {
   title: 'Please, select your modal option',
   content: "You can define the modal option in 'config.js'",

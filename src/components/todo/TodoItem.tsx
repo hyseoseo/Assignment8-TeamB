@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 import { IoMdRemoveCircleOutline } from 'react-icons/io';
 import { BOX_STYLE, ButtonDefault, COLOR_STYLE, FONT_SIZE_STYLE } from 'styles';
-import { getUpdatedTimeFormat } from 'utils/getUpdatedTimeFormat';
 import { MODAL_OPTION } from 'config';
 import { useModalContext } from 'contexts';
 import { SetState } from 'hooks/types';
+import { getUpdatedTimeFormat } from 'utils';
 import { Itodo, Status } from './type';
-import { TodoController } from '.';
+import { TodoStatus } from '.';
 
 interface Iprop {
   todo: Itodo;
@@ -18,26 +18,16 @@ interface Iprop {
   handleDragEnd: (setIsDragOver: SetState<boolean>) => void;
   handleDeleteTodo: (id: number) => void;
   changeTodoStatus: (id: number, status: Status) => void;
-  changeTodoImportance: (id: number) => void;
+  toggleBookmark: (id: number) => void;
 }
 
 const TodoItem: React.FC<Iprop> = ({ ...props }) => {
-  const [isDragOver, setIsDragOver] = useState(false);
-  const {
-    todo,
-    index,
-    handleDragStart,
-    handleDragEnter,
-    handleDragOver,
-    handleDragEnd,
-    handleDeleteTodo,
-    changeTodoStatus,
-    changeTodoImportance,
-  } = props;
+  //prettier-ignore
+  const { todo, index, handleDragStart, handleDragEnter, handleDragOver, handleDragEnd, handleDeleteTodo, changeTodoStatus, toggleBookmark } = props;
+  const [isDragOver, setIsDragOver] = useState<boolean>(false);
+  const [time, setTime] = useState<string>(getUpdatedTimeFormat(todo.updatedAt));
   const { openModal } = useModalContext()!;
   const ListStyle = getListStyle(todo.status);
-
-  const [time, setTime] = useState<string>(getUpdatedTimeFormat(todo.updatedAt));
 
   useEffect(() => {
     setTime(getUpdatedTimeFormat(todo.updatedAt));
@@ -68,14 +58,12 @@ const TodoItem: React.FC<Iprop> = ({ ...props }) => {
       <button css={DeleteButton} onClick={handleRemove}>
         <IoMdRemoveCircleOutline />
       </button>
-      <div css={ControlBox}>
-        <TodoController
-          todo={todo}
-          changeTodoStatus={changeTodoStatus}
-          changeTodoImportance={changeTodoImportance}
-        />
-        <small css={LastUpdate}>Updated {time} ago</small>
-      </div>
+      <TodoStatus
+        todo={todo}
+        time={time}
+        changeTodoStatus={changeTodoStatus}
+        toggleBookmark={toggleBookmark}
+      />
     </li>
   );
 };
@@ -164,16 +152,4 @@ const DeleteButton = css`
       transform: rotate(-90deg);
     }
   }
-`;
-
-const ControlBox = css`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-`;
-
-const LastUpdate = css`
-  color: ${COLOR_STYLE.greyDarkest};
-  font-size: ${FONT_SIZE_STYLE.smaller};
-  transform: translateY(-3px);
 `;

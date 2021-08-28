@@ -8,27 +8,6 @@ const initialTodolist: Itodo[] = [];
 const useTodo = () => {
   const [todos, setTodos] = useLocalStorage(STORAGE_KEYS.todos, initialTodolist);
 
-  const changeTodoStatus = (id: number, status: Status): void => {
-    setTodos((prev) =>
-      prev.map((todo: Itodo) => {
-        return todo.id === id ? { ...todo, updatedAt: new Date(), status: status } : todo;
-      }),
-    );
-  };
-
-  const changeTodoImportance = (id: number): void => {
-    setTodos((prev) =>
-      prev.map((todo: Itodo) => {
-        if (todo.id !== id) return todo;
-        return {
-          ...todo,
-          updatedAt: new Date(),
-          isImportant: !todo.isImportant,
-        };
-      }),
-    );
-  };
-
   const removeTodo = (id: number): void => {
     setTodos((prev: Itodo[]) => prev.filter((todo: Itodo) => todo.id !== id));
   };
@@ -54,6 +33,27 @@ const useTodo = () => {
       isVisible: true,
     });
     setTodos(newTodos);
+  };
+
+  const changeTodoStatus = (id: number, status: Status): void => {
+    setTodos((prev) =>
+      prev.map((todo: Itodo) => {
+        return todo.id === id ? { ...todo, updatedAt: new Date(), status: status } : todo;
+      }),
+    );
+  };
+
+  const toggleBookmark = (id: number): void => {
+    setTodos((prev) =>
+      prev.map((todo: Itodo) => {
+        if (todo.id !== id) return todo;
+        return {
+          ...todo,
+          updatedAt: new Date(),
+          isImportant: !todo.isImportant,
+        };
+      }),
+    );
   };
 
   const sortTodo = (): void => {
@@ -109,7 +109,7 @@ const useTodo = () => {
     changeTodoStatus,
     createTodo,
     handleDeleteTodo,
-    changeTodoImportance,
+    toggleBookmark,
     sortTodo,
     filterList,
   };

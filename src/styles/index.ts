@@ -2,7 +2,14 @@ import { GlobalStyles } from './GlobalStyles';
 import { COLOR_STYLE } from './color';
 import { FONT_SIZE_STYLE } from './fontSize';
 import { BOX_STYLE } from './border';
-import { ButtonDefault, FlexCenter, FlexColCenter, MainBtn, MainSelectedBtn } from './styles';
+import {
+  ButtonDefault,
+  FlexCenter,
+  FlexColCenter,
+  MainBtn,
+  MainSelectedBtn,
+  Overlay,
+} from './styles';
 
 export {
   GlobalStyles,
@@ -14,4 +21,5 @@ export {
   ButtonDefault,
   MainBtn,
   MainSelectedBtn,
+  Overlay,
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { css } from '@emotion/react';
 import { AiOutlineWarning } from 'react-icons/ai';
-import { BOX_STYLE, COLOR_STYLE, FONT_SIZE_STYLE, ButtonDefault } from 'styles';
+import { BOX_STYLE, COLOR_STYLE, FONT_SIZE_STYLE, ButtonDefault, Overlay } from 'styles';
 import { useModalContext } from 'contexts/ModalContext';
 import { ButtonType } from 'hooks/types';
 
@@ -59,17 +59,6 @@ const getButtonStyle = (btnType: ButtonType) => {
       return Btn;
   }
 };
-
-const Overlay = css`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 100;
-  background-color: #000;
-  opacity: 0.5;
-`;
 
 const ModalWrapper = css`
   display: flex;

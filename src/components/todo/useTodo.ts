@@ -8,27 +8,6 @@ const initialTodolist: Itodo[] = [];
 const useTodo = () => {
   const [todos, setTodos] = useLocalStorage(STORAGE_KEYS.todos, initialTodolist);
 
-  const changeTodoStatus = (id: number, status: Status): void => {
-    setTodos((prev) =>
-      prev.map((todo: Itodo) => {
-        return todo.id === id ? { ...todo, updatedAt: new Date(), status: status } : todo;
-      }),
-    );
-  };
-
-  const changeTodoImportance = (id: number): void => {
-    setTodos((prev) =>
-      prev.map((todo: Itodo) => {
-        if (todo.id !== id) return todo;
-        return {
-          ...todo,
-          updatedAt: new Date(),
-          isImportant: !todo.isImportant,
-        };
-      }),
-    );
-  };
-
   const removeTodo = (id: number): void => {
     setTodos((prev: Itodo[]) => prev.filter((todo: Itodo) => todo.id !== id));
   };
@@ -50,10 +29,31 @@ const useTodo = () => {
       id: todos.length,
       createdAt: new Date(),
       updatedAt: new Date(),
-      isImportant: false,
+      isBookmarked: false,
       isVisible: true,
     });
     setTodos(newTodos);
+  };
+
+  const changeTodoStatus = (id: number, status: Status): void => {
+    setTodos((prev) =>
+      prev.map((todo: Itodo) => {
+        return todo.id === id ? { ...todo, updatedAt: new Date(), status: status } : todo;
+      }),
+    );
+  };
+
+  const toggleBookmark = (id: number): void => {
+    setTodos((prev) =>
+      prev.map((todo: Itodo) => {
+        if (todo.id !== id) return todo;
+        return {
+          ...todo,
+          updatedAt: new Date(),
+          isBookmarked: !todo.isBookmarked,
+        };
+      }),
+    );
   };
 
   const sortTodo = (): void => {
@@ -86,7 +86,7 @@ const useTodo = () => {
   const filterByBookmark = (): void => {
     setTodos((prev) =>
       prev.map((todo: Itodo) =>
-        todo.isImportant ? { ...todo, isVisible: true } : { ...todo, isVisible: false },
+        todo.isBookmarked ? { ...todo, isVisible: true } : { ...todo, isVisible: false },
       ),
     );
   };
@@ -109,7 +109,7 @@ const useTodo = () => {
     changeTodoStatus,
     createTodo,
     handleDeleteTodo,
-    changeTodoImportance,
+    toggleBookmark,
     sortTodo,
     filterList,
   };

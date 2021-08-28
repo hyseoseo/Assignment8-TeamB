@@ -1,21 +1,23 @@
 import TodoContainer from './TodoContainer';
 import TodoHead from './TodoHead';
 import TodoCreate from './TodoCreate';
+import TodoController from './TodoController';
 import TodoFilter from './TodoFilter';
 import TodoBoundary from './TodoBoundary';
 import TodoList from './TodoList';
 import TodoItem from './TodoItem';
-import TodoController from './TodoController';
+import TodoStatus from './TodoStatus';
 import useTodo from './useTodo';
 
 export {
   TodoContainer,
-  TodoCreate,
   TodoHead,
+  TodoCreate,
+  TodoController,
   TodoFilter,
   TodoBoundary,
   TodoItem,
-  TodoController,
+  TodoStatus,
   TodoList,
   useTodo,
 };

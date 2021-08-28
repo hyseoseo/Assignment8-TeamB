@@ -16,7 +16,7 @@ export interface Itodo {
   status: Status;
   createdAt: Date;
   updatedAt: Date;
-  isImportant: boolean;
+  isBookmarked: boolean;
   isVisible: boolean;
 }
 

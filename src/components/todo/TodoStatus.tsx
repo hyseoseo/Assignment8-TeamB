@@ -22,7 +22,7 @@ const TodoStatus: React.FC<Iprop> = ({ todo, time, changeTodoStatus, toggleBookm
     <div css={Container}>
       <div css={ControlBox}>
         <button
-          css={todo.isImportant ? MainSelectedBtn : MainBtn}
+          css={todo.isBookmarked ? MainSelectedBtn : MainBtn}
           onClick={() => toggleBookmark(todo.id)}
         >
           <span css={status === Status.done && Done}>Bookmark</span>

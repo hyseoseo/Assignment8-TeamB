@@ -29,7 +29,7 @@ const useTodo = () => {
       id: todos.length,
       createdAt: new Date(),
       updatedAt: new Date(),
-      isImportant: false,
+      isBookmarked: false,
       isVisible: true,
     });
     setTodos(newTodos);
@@ -50,7 +50,7 @@ const useTodo = () => {
         return {
           ...todo,
           updatedAt: new Date(),
-          isImportant: !todo.isImportant,
+          isBookmarked: !todo.isBookmarked,
         };
       }),
     );
@@ -86,7 +86,7 @@ const useTodo = () => {
   const filterByBookmark = (): void => {
     setTodos((prev) =>
       prev.map((todo: Itodo) =>
-        todo.isImportant ? { ...todo, isVisible: true } : { ...todo, isVisible: false },
+        todo.isBookmarked ? { ...todo, isVisible: true } : { ...todo, isVisible: false },
       ),
     );
   };

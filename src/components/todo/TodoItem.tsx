@@ -38,7 +38,7 @@ const TodoItem: React.FC<Iprop> = ({ ...props }) => {
       ...MODAL_OPTION.DELETE,
       content: '',
       task: todo.taskName,
-      taskInfo: `${todo.status}${todo.isImportant ? ', Bookmark' : ''}, updated ${time} ago`,
+      taskInfo: `${todo.status}${todo.isBookmarked ? ', Bookmark' : ''}, updated ${time} ago`,
       onOk() {
         handleDeleteTodo(todo.id);
       },

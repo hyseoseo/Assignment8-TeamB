@@ -88,6 +88,7 @@ const useTodo = () => {
       prev.map((todo: Itodo) =>
         todo.isBookmarked ? { ...todo, isVisible: true } : { ...todo, isVisible: false },
       ),
+
     );
   };
 

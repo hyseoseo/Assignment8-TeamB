@@ -6,10 +6,10 @@ import { Modal } from 'components';
 const ModalContext = React.createContext<IuseModal | null>(null);
 
 export const ModalProvider: React.FC = ({ children }) => {
-  const { isVisible, openModal, closeModal, ModalComponent } = useModal();
+  const { isVisible, openModal, closeModal, contents } = useModal();
 
   return (
-    <ModalContext.Provider value={{ isVisible, openModal, closeModal, ModalComponent }}>
+    <ModalContext.Provider value={{ isVisible, openModal, closeModal, contents }}>
       <Modal />
       {children}
     </ModalContext.Provider>

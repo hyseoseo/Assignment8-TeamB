@@ -1,17 +1,23 @@
 export enum Status {
-  completed = '완료',
-  notStarted = '시작안함',
-  onGoing = '진행중',
+  todo = 'To do',
+  progress = 'In progress',
+  done = 'Done',
+}
+
+export enum FilterType {
+  bookmark,
+  status,
+  none,
 }
 
 export interface Itodo {
   id: number;
   taskName: string;
-  status: Status | string;
+  status: Status;
   createdAt: Date;
   updatedAt: Date;
-  isImportant: boolean;
-  visible: boolean;
+  isBookmarked: boolean;
+  isVisible: boolean;
 }
 
-export const OPTIONS = [Status.notStarted, Status.onGoing, Status.completed];
+export const OPTIONS = [Status.todo, Status.progress, Status.done];

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-
 import { UseStorage } from './types';
 
 const useLocalStorage = <T extends string, U>(key: T, initialValue: U): UseStorage<U> => {

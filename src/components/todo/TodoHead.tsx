@@ -1,31 +1,41 @@
 import React from 'react';
 import { css } from '@emotion/react';
+import { BOX_STYLE, COLOR_STYLE, FONT_SIZE_STYLE } from 'styles';
 import { getCurrentDate } from 'utils';
-import { TodoCreate } from 'components/todo';
+import { FilterType, Status } from './type';
+import { TodoCreate, TodoController } from 'components/todo';
 
 interface ITodoHeadProps {
   createTodo: (value: string) => void;
   sortTodo: () => void;
+  filterList: (filterType: FilterType, status?: Status) => void;
 }
 
-const TodoHead: React.FC<ITodoHeadProps> = ({ createTodo, sortTodo }) => {
+const TodoHead: React.FC<ITodoHeadProps> = ({ createTodo, sortTodo, filterList }) => {
+  const curDate = getCurrentDate();
+
   return (
-    <header css={HeadBlock}>
-      <h1 css={Time}>{getCurrentDate()}</h1>
+    <header css={Header}>
+      <h1 css={DateStyle}>{curDate}</h1>
       <TodoCreate createTodo={createTodo} />
-      <button onClick={sortTodo}>생성일 순 정렬</button>
+      <TodoController filterList={filterList} sortTodo={sortTodo} />
     </header>
   );
 };
 
 export default TodoHead;
 
-const HeadBlock = css`
-  text-align: center;
-  padding-top: 30px;
+const Header = css`
+  width: 100%;
+  background-color: ${COLOR_STYLE.white};
+  padding: 1.5rem 1.75rem;
+  border-radius: 5px;
+  box-shadow: ${BOX_STYLE.shadow};
 `;
 
-const Time = css`
-  padding-bottom: 10px;
-  font-size: 1rem;
+const DateStyle = css`
+  text-align: center;
+  font-size: ${FONT_SIZE_STYLE.medium};
+  color: ${COLOR_STYLE.greyDarkest};
+  margin-bottom: 1.25rem;
 `;

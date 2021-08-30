@@ -6,6 +6,7 @@ import useFilter from 'hooks/useFilter';
 import Filter from './Filter';
 import { ChangeEvent } from 'hooks/types';
 
+
 const TodoContainer: React.FC = () => {
   const {
     todos,
@@ -13,11 +14,10 @@ const TodoContainer: React.FC = () => {
     changeTodoStatus,
     createTodo,
     handleDeleteTodo,
-    changeTodoImportance,
+    toggleBookmark,
     sortTodo,
+    filterList,
   } = useTodo();
-  const { filteredItem, filterOption, filterClicked, handleCheck, setFilteredResult } =
-    useFilter(todos);
 
   const statusList = [Status.notStarted, Status.onGoing, Status.completed];
 
@@ -62,6 +62,7 @@ const TodoContainer: React.FC = () => {
   }, [checkedStatus]);
 
   return (
+
     <div css={TodoTemplate}>
       <TodoHead createTodo={createTodo} sortTodo={sortTodo} />
       <fieldset>
@@ -79,13 +80,10 @@ const TodoContainer: React.FC = () => {
       <Filter handleCheck={handleCheck} setFilteredResult={setFilteredResult} />
       <TodoList
         todos={todos}
-        filteredItem={filteredItem}
-        filterOption={filterOption}
-        filterClicked={filterClicked}
         setTodos={setTodos}
         handleDeleteTodo={handleDeleteTodo}
         changeTodoStatus={changeTodoStatus}
-        changeTodoImportance={changeTodoImportance}
+        toggleBookmark={toggleBookmark}
       />
     </div>
   );
@@ -93,22 +91,10 @@ const TodoContainer: React.FC = () => {
 
 export default TodoContainer;
 
-const TodoTemplate = css`
-  width: 70%;
-  height: 800px;
-
-  min-width: 360px;
-  max-width: 700px;
-
-  background: white;
-  border-radius: 30px;
-  box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.1);
-
+const Container = css`
+  width: 50%;
+  height: 90vh;
   margin: 0 auto;
-
-  margin-top: 40px;
-  margin-bottom: 40px;
-
   display: flex;
   flex-direction: column;
 `;

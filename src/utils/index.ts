@@ -1,4 +1,5 @@
 import { getCurrentDate } from './getCurrentDate';
 import { sortDate } from './sortDate';
+import { getUpdatedTimeFormat } from './getUpdatedTimeFormat';
 
-export { getCurrentDate, sortDate };
+export { getCurrentDate, getUpdatedTimeFormat, sortDate };

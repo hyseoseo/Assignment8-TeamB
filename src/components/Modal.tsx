@@ -64,9 +64,8 @@ const ModalWrapper = css`
   display: flex;
   align-items: flex-start;
   width: 26rem;
-  height: 12rem;
   background-color: ${COLOR_STYLE.white};
-  padding: 2.5rem;
+  padding: 3rem 2.5rem 4.5rem 2.5rem;
   border-radius: 2px;
   box-shadow: ${BOX_STYLE.shadowDarker};
   position: fixed;
